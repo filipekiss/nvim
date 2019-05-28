@@ -1,0 +1,22 @@
+snippet ext "Extensions Bootstrap" b
+" vim: ft=vim :tw=80 :sw=4
+
+scriptencoding utf-8
+
+if extensions#isInstalling()
+	call extensions#loadExtension('${2:https://github.com/${1:user/repo}}')
+	finish
+endif
+
+$0
+endsnippet
+
+snippet @map "Mappings docblock" b
+"" [${1:N}] ${2:<leader>${3:a}} -- ${4:Keybinding Description} ${5:[${6:plugin}]}
+endsnippet
+
+snippet @cmd "Commands docblock" b
+"# ${1::Command} -- ${2:Command Description} ${3:[${4:plugin}]}
+endsnippet
+
+# vim: set ts=4 sw=4 tw=80 ft=snippets noet :

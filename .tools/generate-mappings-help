@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+vimpath=$(realpath "./")
+
+print_command_mapping() {
+    awk -F ' -- ' '{s=sprintf("`%-20s`",$1);gsub(/ /,".",s);printf "  %s", s;printf " %s  \n", $2}'
+}
+
+grep_commands() {
+    local commandType="$1"
+    case "$commandType" in
+    n | N)
+        grepPattern='^\"\" \[N\]'
+        ;;
+    i | I)
+        grepPattern='^\"\" \[I\]'
+        ;;
+    *)
+        grepPattern='^\"\" '
+        ;;
+    esac
+    grep -h -E "${grepPattern}" ${vimpath}/config/mappings.vim ${vimpath}/extensions/*.vim
+}
+
+echo "=============================================================================="
+echo "Vimfiles Key Bindings                                   *vimfiles-keybindings*"
+echo ""
+echo "See: https://github.com/filipekiss"
+echo ""
+echo "Vimfiles Help Index: |VimFiles|"
+echo ""
+echo '  `[Mode].<Mapping>.........`Description [plugin]'
+echo ""
+echo "Vimfiles Normal Mode Mappings                           *vimfiles-normal-keys*"
+echo "-----------------------------                                                 "
+echo ""
+echo "The mappings below are used in normal mode. They're listed in alphabetical"
+echo "order"
+echo ""
+grep_commands "N" |
+    sed 's/\[N\] //g' |
+    sort -V |
+    sed 's/: / -- /g' |
+    sed 's/^"" //g' |
+    print_command_mapping
+echo ""
+echo "Vimfiles Insert Mode Mappings                           *vimfiles-insert-keys*"
+echo "-----------------------------                                                 "
+echo ""
+echo "The mappings below are used in insert mode. They're listed in alphabetical"
+echo "order"
+echo ""
+grep_commands "I" |
+    sed 's/\[I\] //g' |
+    sort -V |
+    sed 's/: / -- /g' |
+    sed 's/^"" //g' |
+    print_command_mapping
+echo ""
+echo "Vimfiles Other Mode Mappings                             *vimfiles-other-keys*"
+echo "----------------------------                                                  "
+echo ""
+echo "These are all the mappings that are neither in normal mode nor insert mode,"
+echo "like visual mode. They're listed in alphabetical order. The letter inside"
+echo "the square brackes indicates the mode of the command >"
+echo ""
+echo "  N - Normal"
+echo "  I - Insert"
+echo "  V - Visual and Select"
+echo "  X - Visual"
+echo "  S - Select Mode"
+echo "  C - Command-line mode"
+echo "  O - Operator Pending"
+echo "<"
+grep_commands |
+    grep -v -h -E '^\"\" \[N\]' |
+    grep -v -h -E '^\"\" \[I\]' |
+    sort -V |
+    sed 's/: / -- /g' |
+    sed 's/^"" //g' |
+    print_command_mapping
+echo ""
+echo "vim:tw=78:ts=8:ft=help:norl:"

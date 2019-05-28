@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+vimpath=$(realpath "./")
+
+print_command_mapping() {
+    awk -F ' -- ' '{s=sprintf("`%-30s`",$1);gsub(/ /,".",s);printf "  %s", s;printf " %s  \n", $2}'
+}
+
+echo "=============================================================================="
+echo "Vimfiles Commands                                          *vimfiles-commands*"
+echo ""
+echo "See: https://github.com/filipekiss"
+echo ""
+echo "Vimfiles Help Index: |VimFiles|"
+echo ""
+grep -h -E '^\"\# ' config/commands.vim extensions/*.vim |
+    sort -V |
+    sed 's/^"# //g' |
+    print_command_mapping
+echo ""
+echo "vim:tw=78:ts=8:ft=help:norl:"

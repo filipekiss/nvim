@@ -1,0 +1,4 @@
+.viminfo
+plugged/
+tmp
+autoload/plug.vim
