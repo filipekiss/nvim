@@ -27,10 +27,10 @@ command! WS w !sudo tee %
 command! FormatJSON %!python -m json.tool
 
 "# :EditExtension <name> -- Edit the extension file with the given name
-"command! -bang -nargs=? EditExtension :call functions#EditExtension(<q-bang>, <q-args>)
+command! -bang -nargs=? EditExtension :call functions#EditExtension(<q-bang>, <q-args>)
 
 "# :ReloadExtensions -- Reload and install missing extensions
-"command! ReloadExtensions :call extensions#reload()
+command! ReloadExtensions :call extensions#reload()
 
 "# :Prettier -- Run Prettier in current file
 command! Prettier :silent !prettier --write %

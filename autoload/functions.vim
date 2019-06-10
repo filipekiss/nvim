@@ -29,7 +29,8 @@ endfunction
 
 let g:fckNoLineNumbers = ['tagbar', 'gitcommit', 'fzf', 'startify']
 function! functions#displayLineNumbers(mode) abort
-    if functions#hasFileType(g:fckNoLineNumbers)
+    let s:disableNumbersForBuffer = get(b:, 'fckNoLineNumber', 0)
+    if functions#hasFileType(g:fckNoLineNumbers) || (s:disableNumbersForBuffer == 1)
         set nonumber
         set norelativenumber
     else
@@ -168,7 +169,7 @@ function! functions#EditExtension(bang, ...)
         return
     endif
 
-    let s:file = expand($HOME) . '/.dotfiles/sidekicks/vim/extensions/' . s:name . '.vim'
+    let s:file = expand($VIMHOME) . '/extensions/' . s:name . '.vim'
     call EditFile(s:file)
 endfunction
 
