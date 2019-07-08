@@ -139,29 +139,11 @@ function! functions#ExecuteMacroOverVisualRange()
     execute ":'<,'>normal @".nr2char(getchar())
 endfunction
 
-function! functions#EditSnippets(bang, ...)
-
-    let s:type = get(a:, 1, &filetype)
-
-    if (s:type ==# '')
-        let s:type = &filetype
-    endif
-
-    if (s:type ==# '')
-        echom 'No filetype passed or detected'
-        return
-    endif
-
-    let s:file = expand($HOME) . '/.dotfiles/sidekicks/vim/ultisnips/' . s:type . '.snippets'
-    call EditFile(s:file)
-endfunction
-
 function! functions#openMarkdownPreview() abort
     call system('open file://' . expand('%:p'))
 endfunction
 
 function! functions#EditExtension(bang, ...)
-
     let s:name = get(a:, 1, &filetype)
 
     if (s:name ==# '')
@@ -171,6 +153,22 @@ function! functions#EditExtension(bang, ...)
 
     let s:file = expand($VIMHOME) . '/extensions/' . s:name . '.vim'
     call EditFile(s:file)
+endfunction
+
+function! functions#ListExtensions(arglead, cmdline, cursorpos)
+    let ret = {}
+    let items = map(
+    \   split(globpath(expand($VIMHOME), 'extensions/*.vim'), '\n'),
+    \   'fnamemodify(v:val, ":t:r")'
+    \ )
+    call insert(items, 'all')
+    for item in items
+        if !has_key(ret, item) && item =~ '^'.a:arglead
+            let ret[item] = 1
+        endif
+    endfor
+
+    return sort(keys(ret))
 endfunction
 
 function! EditFile(file) abort
@@ -224,43 +222,3 @@ function! Slugify(string) abort
     let l:finalString = substitute(l:finalString, '--*', '-', 'g')
     return l:finalString
 endfunction
-
-function! MakeMapDoc() abort
-    let l:commandLine = getline('.')
-    let l:snippetFormat = '""'.' [%s] %s -- ${1:Keybinding Description}${2: [${3:%s}]}'
-    let l:pluginName = expand('%:t:r')
-    if l:pluginName ==? ''
-        let l:pluginName = 'plugin'
-    endif
-    let l:plainFormat = '""'.' [%s] %s -- Keybinding Description [plugin]'
-    let l:commandParts = split(l:commandLine)
-    let l:commandMap = { 'tail': [] }
-    let l:commandPartsCount = 0
-    for commandpart in l:commandParts
-        " Get the command mode from the map (n for normal, i for insert, etc…)
-        if l:commandPartsCount <= 0
-            let l:commandMap.mode = toupper(commandpart[0])
-            let l:commandPartsCount += 1
-            continue
-        endif
-        if match(commandpart, '<\(silent\|buffer\)>') == -1
-            if (l:commandPartsCount <= 1)
-                let l:commandMap.mapping = commandpart
-                let l:commandPartsCount += 1
-                continue
-            endif
-            let l:commandMap.tail += [commandpart]
-            let l:commandPartsCount += 1
-        endif
-    endfor
-    let l:commandMap.command = join(l:commandMap.tail)
-    if (exists('*UltiSnips#Anon'))
-        let l:snippet = printf(l:snippetFormat, l:commandMap.mode, l:commandMap.mapping, l:pluginName)
-        execute 'norm! O'
-        echo UltiSnips#Anon(l:snippet)
-    else
-        let l:snippet = printf(l:plainFormat, l:commandMap.mode, l:commandMap.mapping)
-        execute 'norm! O' . l:snippet
-    endif
-endfunction
-
