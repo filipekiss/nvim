@@ -35,7 +35,10 @@ let g:lightline.component_expand = {
             \ 'linter_warnings': 'ale#StatuslineLinterWarnings',
             \ 'linter_errors': 'ale#StatuslineLinterErrors',
             \ 'linter_ok': 'ale#StatuslineLinterOK',
-            \ 'filename': 'FilenamePrefix',
+            \ }
+
+let g:lightline.component_function = {
+            \ 'filename': 'FilenamePrefix'
             \ }
 
 let g:lightline.component_type = {
@@ -56,11 +59,18 @@ let g:lightline.tabline = {
             \ 'left': [ [ 'tabs' ] ],
             \ 'right': [ [ 'close' ] ] }
 
-function! FilenamePrefix()
+function! FilenamePrefix() abort
     " Get path without filename
     let l:basename=expand('%:h')
-    " Get custom prefix if set. If not, use current folder name
+    " Get custom prefix if set.
     let l:pathPrefix=get(b:, 'fkBufPrefix', fnamemodify(getcwd(), ':t'))
+    let l:cwd = getcwd()
+    " If the window is outside cwd (mainly used for inactive windows), treat the
+    " path to prevent things like vim/~/.vim/file.vim and show .vim/file.vim,
+    " for example
+    if l:basename =~ l:cwd
+        let l:basename = substitute(l:basename, '\C^' . l:cwd . '/', '', '')
+    endif
     " Format
     let l:dimmedColor='%#LighlineMiddle_normal#'
     let l:normalColor='%#LightlineLeft_normal_0_1#'
