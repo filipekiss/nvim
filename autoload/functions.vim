@@ -222,3 +222,32 @@ function! Slugify(string) abort
     let l:finalString = substitute(l:finalString, '--*', '-', 'g')
     return l:finalString
 endfunction
+
+
+function! functions#has_floating_window() abort
+  " MenuPopupChanged was renamed to CompleteChanged -> https://github.com/neovim/neovim/pull/9819
+  return (exists('##MenuPopupChanged') || exists('##CompleteChanged')) && exists('*nvim_open_win')
+endfunction
+
+function! functions#floating_fzf() abort
+  let l:buf = nvim_create_buf(v:false, v:true)
+  call setbufvar(buf, '&signcolumn', 'no')
+
+  let l:height = float2nr(&lines * 0.4)
+  let l:width = float2nr(&columns - (&columns * 8 / 40))
+  let l:col = float2nr((&columns - width) / 2)
+
+  let l:opts = {
+        \ 'relative': 'editor',
+        \ 'row': 3,
+        \ 'col': l:col,
+        \ 'width': l:width,
+        \ 'height': l:height
+        \ }
+
+  call nvim_open_win(l:buf, v:true, l:opts)
+endfunction
+
+function! functions#fzf_window() abort
+  return functions#has_floating_window() ? 'call functions#floating_fzf()' : 'enew'
+endfunction

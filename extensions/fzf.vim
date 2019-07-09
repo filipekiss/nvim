@@ -13,7 +13,7 @@ if extensions#isMissing('fzf.vim', 'fzf.vim')
 endif
 
 let g:fzf_files_options = $FZF_CTRL_T_OPTS
-let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_layout = { 'window': functions#fzf_window() }
 let g:fzf_commits_log_options = substitute(system("git config --get alias.l | awk '{$1=\"\"; print $0;}'"), '\n\+$', '', '')
 let g:fzf_history_dir = '~/.fzf-history'
 
