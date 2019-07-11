@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+type cargo >/dev/null 2>&1 || {
+    echo >&2 "# cargo and rust must be installed."
+    echo >&2 "# Please see installation instructions at"
+    echo >&2 "# https://rustup.rs/"
+    echo >&2 "# Skipping packages installation…"
+    exit 0
+}
+
+packages=(
+    "bat"
+    "devicon-lookup"
+)
+
+for package in "${packages[@]}"; do
+    echo "# Installing ${package}"
+    command cargo install "${package}" || echo "# Something went wrong, please see above"
+done

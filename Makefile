@@ -66,7 +66,7 @@ help:
 
 ## Run everything needed
 .PHONY: magic
-magic: link docs install
+magic: link docs packages restore
 
 ## Link cwd to ~/.vim and ~/.config/nvim
 .PHONY: link
@@ -95,6 +95,11 @@ install:
 .PHONY: upgrade
 upgrade:
 	@$(vim) --cmd "let g:fck_extensions_ignore_local = 1" +PlugUpdate +PlugUpgrade +PlugClean +"PlugSnapshot ${lockfile}" +PlugDiff
+
+## Install required external packages
+.PHONY: packages
+packages:
+	@bash ./.tools/install-cargo-packages
 
 ## Install plugins from lockfile
 .PHONY: restore
