@@ -96,6 +96,15 @@ function! FilenamePrefix() abort
     return  l:dimmedColor . l:pathPrefix . substitute(l:basename . '/', '\C^' . $HOME, '~', '') . l:normalColor . l:fileName
 endfunction
 
+if executable('devicon-lookup')
+    function! IconFormat() abort
+        let l:fileicon = WebDevIconsGetFileTypeSymbol()
+        return l:fileicon . ' ' . &filetype
+    endfunction
+
+    let g:lightline.component_function.filetype = 'IconFormat'
+endif
+
 if extensions#isInstalled('falcon')
     let g:lightline.colorscheme = 'falcon'
 endif
