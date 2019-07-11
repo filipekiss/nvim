@@ -2,6 +2,8 @@
 
 let s:VIM_PLUG_FOLDER = $VIMHOME . '/plugged'
 let s:VIM_EXTENSIONS_FOLDER_NAME = 'extensions'
+let g:extensions = {}
+let g:extensions.delayed = []
 
 function! extensions#after() abort
     for file in split(glob($VIMHOME . '/' . s:VIM_EXTENSIONS_FOLDER_NAME . '/*.vim'), '\n')
@@ -53,6 +55,12 @@ function! extensions#install() abort
     call extensions#installFrom($VIMHOME . '/' . s:VIM_EXTENSIONS_FOLDER_NAME . '/*.vim')
     if get(g:, 'fck_extensions_ignore_local', 0) != 1
         call extensions#installFrom($VIMHOME . '/' . s:VIM_EXTENSIONS_FOLDER_NAME . '/local/*.vim')
+    endif
+    if !empty(g:extensions.delayed)
+        for s:extension in g:extensions.delayed
+            call extensions#loadExtension(s:extension.extension, s:extension.options)
+        endfor
+        let g:extensions.delayed = []
     endif
     call extensions#end()
 endfunction
@@ -131,6 +139,11 @@ endfunction
 
 function! extensions#loadExtension(extension, ...) abort
     let s:options = get(a:, 1, {})
+    if has_key(s:options, 'delay')
+        unlet s:options.delay
+        call add(g:extensions.delayed, {'extension': a:extension, 'options': s:options})
+        return
+    endif
     call plug#(a:extension, s:options)
     if !extensions#folderExists(a:extension, s:options)
         let g:fck_queued_installation = 1
