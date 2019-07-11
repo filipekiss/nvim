@@ -197,5 +197,3 @@ nmap <silent> <leader>box <Plug>WrapInBox
 nnoremap <silent> <Plug>UnwrapFromBox :normal! 0W2x$xxjddkkddk<cr> :silent! call repeat#set("\<Plug>UnwrapFromBox")<CR>
 "" [N] <leader>unbox -- Remove ASCII box from around current text
 nmap <silent> <leader>unbox <Plug>UnwrapFromBox
-" and a rebox so I can edit the text inside (and I'm lazy)
-nmap <silent> <leader>rebox <Plug>UnwrapFromBox<Plug>WrapInBox
