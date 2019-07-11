@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+type npm >/dev/null 2>&1 || {
+    echo >&2 "# npm and node must be installed."
+    echo >&2 "# Please, install node and npm and try again"
+    echo >&2 "# Skipping node packages installation…"
+}
+
+packages=(
+    "neovim"
+)
+
+for package in "${packages[@]}"; do
+    echo "# Installing ${package}"
+    npm install --global "$package"
+done

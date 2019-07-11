@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+type pip3 >/dev/null 2>&1 || {
+    echo >&2 "# pip3 must be installed."
+    echo >&2 "# Please install python 3.x and pip and try again"
+    echo >&2 "# Skipping python packages installation…"
+    exit 1
+}
+
+packages=(
+    "neovim"
+    "neovim-remote"
+)
+
+for package in "${packages[@]}"; do
+    echo "# Installing ${package}"
+    [[ $package == "pip" ]] && FLAGS="--upgrade" || FLAGS="--user"
+    pip3 install "$FLAGS" "$package"
+done

@@ -100,6 +100,8 @@ upgrade:
 .PHONY: packages
 packages:
 	@bash ./.tools/install-cargo-packages
+	@bash ./.tools/install-node-packages
+	@bash ./.tools/install-python-packages
 
 ## Install plugins from lockfile
 .PHONY: restore

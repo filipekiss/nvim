@@ -5,9 +5,6 @@ function! setup#init() abort
 	" Set python binaries for nvim
         let g:python_host_skip_check = 1
         let g:python3_host_skip_check = 1
-        if executable('python2')
-            let g:python_host_prog = exepath('python2')
-        endif
         if executable('python3')
             let g:python3_host_prog = exepath('python3')
         endif
