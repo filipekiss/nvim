@@ -141,3 +141,29 @@ function! extensions#reload() abort
     call extensions#install()
     call extensions#installCleanup()
 endfunction
+
+
+function! extensions#ListExtensions(arglead, cmdline, cursorpos)
+    let ret = {}
+    let items = map(
+    \   split(globpath(expand($VIMHOME), 'extensions/*.vim'), '\n'),
+    \   'fnamemodify(v:val, ":t:r")'
+    \ )
+    let localItems = map(
+    \   split(globpath(expand($VIMHOME), 'extensions/local/*.vim'), '\n'),
+    \   'fnamemodify(v:val, ":t:r")'
+    \ )
+    let localItems = map(
+                \ localItems,
+                \ '"local/".v:val'
+                \ )
+    call extend(items, localItems)
+    for item in items
+        if !has_key(ret, item) && item =~ '^'.a:arglead
+            let ret[item] = 1
+        endif
+    endfor
+
+    return sort(keys(ret))
+endfunction
+

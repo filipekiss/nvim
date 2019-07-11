@@ -155,22 +155,6 @@ function! functions#EditExtension(bang, ...)
     call EditFile(s:file)
 endfunction
 
-function! functions#ListExtensions(arglead, cmdline, cursorpos)
-    let ret = {}
-    let items = map(
-    \   split(globpath(expand($VIMHOME), 'extensions/*.vim'), '\n'),
-    \   'fnamemodify(v:val, ":t:r")'
-    \ )
-    call insert(items, 'all')
-    for item in items
-        if !has_key(ret, item) && item =~ '^'.a:arglead
-            let ret[item] = 1
-        endif
-    endfor
-
-    return sort(keys(ret))
-endfunction
-
 function! EditFile(file) abort
     let s:mode = 'vs'
     if winwidth(0) <= 2 * (&textwidth ? &textwidth : 80)
@@ -251,3 +235,4 @@ endfunction
 function! functions#fzf_window() abort
   return functions#has_floating_window() ? 'call functions#floating_fzf()' : 'enew'
 endfunction
+
