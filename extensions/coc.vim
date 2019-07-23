@@ -65,7 +65,7 @@ nnoremap <silent> gh :call <SID>show_documentation()<CR>
 
 " List errors
 "" [N] <leader>cl -- List linter errors [coc]
-nnoremap <silent> <leader>cl :<C-u>CocList locationlist<cr>
+nnoremap <silent> <leader>cl :<C-u>CocList diagnostics<cr>
 
 " list commands available in tsserver (and others)
 "" [N] <leader>cc -- List available commands [coc]
