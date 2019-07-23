@@ -77,12 +77,6 @@ inoremap ? ?<c-g>u
 inoremap ! !<c-g>u
 inoremap , ,<c-g>u
 
-" Quickly return to normal mode
-"" [I] jj -- Quickly return to normal mode
-"" [I] kk -- Quickly return to normal mode
-inoremap jj <ESC>
-inoremap kk <ESC>
-
 " Pressing up/down exits insert mode
 inoremap <silent> <Up> <ESC>
 inoremap <silent> <Down> <ESC>

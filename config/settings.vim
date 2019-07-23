@@ -114,9 +114,9 @@ set autoread                                                              " relo
 set scrolloff=5                                                           " Start scrolling slightly before the cursor reaches an edge
 set sidescrolloff=5
 set sidescroll=3                                                          " Scroll sideways a character at a time, rather than a screen at a time
-" Shamelessly taken from https://github.com/jessfraz/.vim/blob/master/vimrc#L84
-" Timeout on keystrokes but not mappings
-set notimeout
+set timeout
+set updatetime=1000
+" Timeout on keystrokes
 set ttimeout
 set ttimeoutlen=10
 " More natural splitting
@@ -159,6 +159,7 @@ set wildignore+=*.rbc,*.rbo,*.gem                                         " …c
 set wildignore+=*/vendor/*,*/.bundle/*,*/.sass-cache/*                    " …vendor files
 set wildignore+=*/node_modules/*                                          " …JavaScript modules
 set wildignore+=package-lock.json                                         " …package-lock.json
+set wildignore+=tags                                                      " …(c)tags files
 
 " ┏━━━━━━━━━━━━━┓
 " ┃ Text Format ┃
