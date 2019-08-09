@@ -62,3 +62,8 @@ endsnippet
 snippet def "variable = variable || default"
 ${1:variable} = $1 || ${2:"${3:default}"}
 endsnippet
+
+snippet esl "eslint comment"
+// eslint-disable${1:-next-line} ${2:no-debugger}
+${0:debugger}
+endsnippet

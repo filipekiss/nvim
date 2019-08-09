@@ -14,11 +14,11 @@ snippet cc "Comment"
 `!p snip.rv = firstLineComment`$0 `!p snip.rv = endLineComment`
 endsnippet
 
-snippet d "Apr 01, 2008"
+snippet date "Apr 01, 2008"
 `date "+%b %e, %Y"`
 endsnippet
 
-snippet dd "Sun, Apr 01"
+snippet date "Sun, Apr 01"
 `date "+%a, %b %e"`
 endsnippet
 
@@ -30,10 +30,6 @@ snippet date "2008-04-01"
 `date "+%Y-%m-%d"`
 endsnippet
 
-snippet date "2008-04-01 08:40"
-`date "+%Y-%m-%d %R"`
-endsnippet
-
 snippet dt "2008-04-01 08:40"
 `date "+%Y-%m-%d %R"`
 endsnippet
@@ -42,8 +38,20 @@ snippet datetime "2008-04-01 08:40"
 `date "+%Y-%m-%d %R"`
 endsnippet
 
-snippet date "2008-04-01T08:40"
-`date "+%FT%R:%S"`
+snippet d "2008-04-01"
+`date "+%F"`
+endsnippet
+
+snippet dd "2008-04-01 08:40"
+`date "+%F %R"`
+endsnippet
+
+snippet ddd "2008-04-01 08:20 -0400"
+`date "+%F %R %z"`
+endsnippet
+
+snippet dtz "2008-04-01 08:20 -0400"
+`date "+%F %R %z"`
 endsnippet
 
 snippet time "08:40"
