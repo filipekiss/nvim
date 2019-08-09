@@ -27,7 +27,7 @@ command! Plugs call fzf#run({
 command! IMaps call fzf#vim#maps('i')
 
 "" [N] <leader><leader> -- List current project files [fzf]
-nnoremap <silent><expr> <leader><leader> functions#isGit() ? ':GFiles<CR>' : ':Files<CR>'
+nnoremap <silent> <leader><leader> :Files<CR>
 "" [N] <Leader>b -- List open buffers [fzf]
 nnoremap <silent> <Leader>b :Buffers<cr>
 "" [N] <leader>s -- Show files that were changed on git [fzf]
