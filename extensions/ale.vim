@@ -16,14 +16,18 @@ let g:ale_lint_on_save = 1
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_enter = 1
 let g:ale_lint_on_text_changed = 'never'
-let g:ale_sign_error = '⨉'
 let g:ale_open_list = 0
-let g:ale_set_signs = 0
+let g:ale_set_signs = 1
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
-let g:ale_sign_warning = g:ale_sign_error
-let g:ale_sign_style_error  = '●'
-let g:ale_sign_style_warning  = g:ale_sign_error
+let g:ale_virtualtext_cursor = 1
+let g:ale_virtualtext_prefix = ' ' " \uf67c
+" The icons are in order of precedence
+let g:ale_sign_error = '' " \uf66f
+let g:ale_sign_warning = '' " \uf66b
+let g:ale_sign_info = '' " \uf129
+let g:ale_sign_style_error  = '' " \uf48f
+let g:ale_sign_style_warning  = '' " \uf77b
 let g:ale_statusline_format = ['E•%d', 'W•%d', 'OK']
 let g:ale_echo_msg_format = '%linter% %severity%% (code)% - %s'
 let g:ale_echo_msg_error_str = '⨉'
@@ -49,12 +53,15 @@ let g:ale_fixers = {
             \ ],
             \ 'javascript': [
             \   'prettier',
+            \   'prettier_eslint',
             \ ],
             \ 'typescript': [
             \   'prettier',
+            \   'prettier_eslint',
             \ ],
             \ 'typescript.tsx': [
-            \ 'prettier'
+            \   'prettier',
+            \   'prettier_eslint',
             \ ],
             \ 'json': [
             \   'prettier',
@@ -118,12 +125,12 @@ function! ale#StatuslineLinterOK() abort
     let l:counts = ale#statusline#Count(bufnr(''))
     let l:all_errors = l:counts.error + l:counts.style_error
     let l:all_non_errors = l:counts.total - l:all_errors
-    let l:is_ok = l:counts.total == 0 ? '🆗' : ''
+    let l:is_ok = l:counts.total == 0 ? '' : '' " \uf45e
     if (g:ale_is_linting)
-        return '🔬'
+        return '' " \uf499
     endif
     if (g:ale_is_fixing)
-        return '🎨'
+        return '' " \uf46b
     endif
     return l:is_ok
 endfunction
