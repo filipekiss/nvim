@@ -1,15 +1,16 @@
 {
     "suggest.noselect": true,
     "suggest.autoTrigger": "always",
-    "suggest.maxCompleteItemCount": 20,
     "suggest.echodocSupport": true,
     "coc.preferences.colorSupport": true,
     "diagnostic.enable": true,
     "diagnostic.displayByAle": true,
     "diagnostic.locationlist": true,
+    "diagnostic.enableMessage": "never",
     "highlight.colors.enable": true,
     "highlight.disableLanguages": ["vim"],
     "emmet.includeLanguages": {
         "php": "html"
-    }
+    },
+    "javascript.suggestionActions.enabled": false
 }

@@ -25,6 +25,8 @@ if extensions#isInstalling()
     finish
 endif
 
+let g:coc_extension_root = $VIMHOME . '/coc/extensions'
+
 let g:coc_snippet_next='<c-j>'
 let g:coc_snippet_prev='<c-k>'
 
@@ -101,4 +103,5 @@ augroup COC_SIGNATURE
     " Update signature help on jump placeholder
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     autocmd CursorHold * silent call CocActionAsync('highlight')
+    autocmd BufWritePost extensions/coc.vim source % | CocRestart
 augroup end
