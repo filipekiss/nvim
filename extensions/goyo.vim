@@ -11,6 +11,8 @@ endif
 nmap <silent> <leader>g :Goyo<CR>
 
 augroup GoyoLimelight
-    autocmd! User GoyoEnter let b:fckNoLineNumber = 1
-    autocmd! User GoyoLeave let b:fckNoLineNumber = 0
+    autocmd! User GoyoEnter let b:fckNoLineNumbers = 1
+    autocmd! User GoyoLeave let b:fckNoLineNumbers = 0
 augroup END
+
+let g:goyo_width=85

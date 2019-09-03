@@ -15,13 +15,13 @@ let g:ale_fix_on_save = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_enter = 1
-let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_text_changed = 'normal'
 let g:ale_open_list = 0
 let g:ale_set_signs = 1
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
 let g:ale_virtualtext_cursor = 1
-let g:ale_virtualtext_prefix = ' ' " \uf67c
+let g:ale_virtualtext_prefix = ' ' " \uf687
 " The icons are in order of precedence
 let g:ale_sign_error = '' " \uf66f
 let g:ale_sign_warning = '' " \uf66b
@@ -30,9 +30,9 @@ let g:ale_sign_style_error  = '' " \uf48f
 let g:ale_sign_style_warning  = '' " \uf77b
 let g:ale_statusline_format = ['E•%d', 'W•%d', 'OK']
 let g:ale_echo_msg_format = '%linter% %severity%% (code)% - %s'
-let g:ale_echo_msg_error_str = '⨉'
-let g:ale_echo_msg_info_str = '●'
-let g:ale_echo_msg_warning_str = '!'
+let g:ale_echo_msg_error_str = g:ale_sign_error
+let g:ale_echo_msg_info_str = g:ale_sign_info
+let g:ale_echo_msg_warning_str = g:ale_sign_warning
 let g:ale_javascript_eslint_suppress_missing_config = 1
 let g:ale_javascript_eslint_suppress_eslintignore = 1
 let g:ale_javascript_prettier_use_local_config = 1
@@ -85,6 +85,9 @@ let g:ale_fixers = {
             \}
 
 " Don't auto fix (format) files inside `node_modules`, minified files and jquery (for legacy codebases)
+" Also, don't lint markdown files that end in a pattern that resembles
+" a language code (for example index.pt.md or index.pt-br.md) because `alex`
+" only understands english
 let g:ale_pattern_options_enabled = 1
 let g:ale_pattern_options = {
             \   '\.min\.(js\|css)$': {
@@ -98,7 +101,10 @@ let g:ale_pattern_options = {
             \   'node_modules/.*': {
             \       'ale_linters': [],
             \       'ale_fixers': []
-            \   }
+            \   },
+            \   '.*\.[a-z]{2}(-[a-z]{2})?\.md': {
+            \       'ale_linters': [],
+            \   },
             \}
 
 function! ale#StatuslineLinterWarnings() abort

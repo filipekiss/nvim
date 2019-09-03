@@ -20,4 +20,5 @@ function! abolish#after() abort
     Abolish haeder          header
     Abolish realted         related
     Abolish withouth without
+    Abolish reponsive responsive
 endfunction

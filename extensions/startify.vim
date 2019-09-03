@@ -30,6 +30,7 @@ let g:startify_custom_header_quotes = startify#fortune#predefined_quotes() + [
 	    \ ['We build our computer (systems) the way we build our cities: over time, without a plan, on top of ruins', '', '- Ellen Ullman'],
 	    \ ['Every great developer you know got there by solving problems they were unqualified to solve until they actually did it', '', '- Patrick McKenzie'],
 	    \ ['Without requirements or design, programming is the art of adding bugs to an empty text file', '', '- Louis Srygley'],
+        \ ['There are 2 hard problems in computer science: cache invalidation, naming things, and off-by-1 errors', '', '- Leon Bambrick']
 	    \ ]
 
 let g:startify_custom_header = 'map(startify#fortune#boxed(), "repeat(\" \", 5).v:val")'
