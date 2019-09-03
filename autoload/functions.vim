@@ -27,9 +27,9 @@ function! functions#should_strip_whitespace()
     return functions#hasFileType(g:fckKeepWhiteSpace)
 endfunction
 
-let g:fckNoLineNumbers = ['tagbar', 'gitcommit', 'fzf', 'startify']
+let g:fckNoLineNumbers = ['tagbar', 'gitcommit', 'fzf', 'startify', 'markdown']
 function! functions#displayLineNumbers(mode) abort
-    let s:disableNumbersForBuffer = get(b:, 'fckNoLineNumber', 0)
+    let s:disableNumbersForBuffer = get(b:, 'fckNoLineNumbers', 0)
     if functions#hasFileType(g:fckNoLineNumbers) || (s:disableNumbersForBuffer == 1)
         set nonumber
         set norelativenumber
