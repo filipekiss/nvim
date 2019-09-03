@@ -69,7 +69,6 @@ set lazyredraw                                                            " don'
 set showmatch                                                             " show matching bracket
 set title                                                                 " show filename at the title of the window
 set nocursorcolumn                                                        " do not highlight column
-set cursorline                                                            " highlight current line
 
 " ┏━━━━━━━━━━━━━━━━━━━━━┓
 " ┃ Completion Settings ┃
