@@ -23,6 +23,9 @@ function! extensions#configure() abort
     for file in split(glob($VIMHOME . '/' . s:VIM_EXTENSIONS_FOLDER_NAME . '/*.vim'), '\n')
         exe 'source' fnameescape(file)
     endfor
+    for file in split(glob($VIMHOME . '/' . s:VIM_EXTENSIONS_FOLDER_NAME . '/local/*.vim'), '\n')
+        exe 'source' fnameescape(file)
+    endfor
 endfunction
 
 function! extensions#end() abort
