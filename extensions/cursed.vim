@@ -8,9 +8,13 @@ if extensions#isInstalling()
 endif
 
 augroup CursedCursorLine
-    autocmd WinEnter * set cursorline
+    autocmd!
+    autocmd WinEnter *  if !cursed#is_disabled() | set cursorline | endif
     autocmd User CursedStartedMoving :set nocursorline
     autocmd User CursedStoppedMoving :set cursorline
+    autocmd WinEnter,WinLeave * :silent DisableBlameLine
+    autocmd User CursedStartedMoving :silent DisableBlameLine
+    autocmd User CursedStoppedMoving :silent EnableBlameLine
 augroup END
 
 
