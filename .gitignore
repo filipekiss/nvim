@@ -2,6 +2,7 @@
 plugged/
 tmp
 autoload/plug.vim
+autoload/plug.vim.old
 sessions/
 coc/
 !coc/extensions/package.json
