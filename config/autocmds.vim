@@ -32,6 +32,9 @@ augroup MyAutoCmds
     " Update cd for current window
     autocmd BufAdd,BufEnter * call functions#SetProjectDir()
     autocmd BufAdd,BufEnter * call setup#overrides()
+
+    " Reload config files when saved
+    autocmd BufWritePost $VIMHOME/*.vim source %
 augroup END
 
 augroup javascript_folding
