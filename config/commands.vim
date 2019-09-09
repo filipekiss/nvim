@@ -32,5 +32,5 @@ command! -bang -nargs=? -complete=customlist,extensions#ListExtensions EditExten
 "# :ReloadExtensions -- Reload and install missing extensions
 command! ReloadExtensions :call extensions#reload()
 
-"# :Prettier -- Run Prettier in current file
-command! Prettier :silent !prettier --write %
+"# :TabMessage -- Redirect the output of a command to a new tab
+command! -nargs=+ -complete=command TabMessage call functions#TabMessage(<q-args>)
