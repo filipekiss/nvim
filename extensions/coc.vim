@@ -104,4 +104,5 @@ augroup COC_SIGNATURE
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     autocmd CursorHold * silent call CocActionAsync('highlight')
     autocmd BufWritePost extensions/coc.vim source % | CocRestart
+    autocmd BufWritePost coc-settings.json CocRestart
 augroup end
