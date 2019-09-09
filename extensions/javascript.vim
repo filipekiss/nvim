@@ -3,7 +3,7 @@
 scriptencoding utf-8
 
 if extensions#isInstalling()
-    call extensions#loadExtension('https://github.com/pangloss/vim-javascript')
+    call extensions#loadExtension('https://github.com/neoclide/vim-jsx-improve')
     finish
 endif
 
