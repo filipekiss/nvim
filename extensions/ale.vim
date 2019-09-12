@@ -3,7 +3,7 @@
 scriptencoding utf-8
 
 if extensions#isInstalling()
-    call extensions#loadExtension('https://github.com/w0rp/ale')
+    call extensions#loadExtension('https://github.com/dense-analysis/ale')
     finish
 endif
 
