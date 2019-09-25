@@ -27,7 +27,7 @@ command! Plugs call fzf#run({
 command! IMaps call fzf#vim#maps('i')
 
 "" [N] <leader><leader> -- List current project files [fzf]
-nnoremap <silent> <leader><leader> :Files<CR>
+nnoremap <silent><expr> <leader><leader> functions#isGit() ? ':GFiles<CR>' : ':Files<CR>'
 "" [N] <Leader>b -- List open buffers [fzf]
 nnoremap <silent> <Leader>b :Buffers<cr>
 "" [N] <leader>s -- Show files that were changed on git [fzf]
@@ -97,7 +97,7 @@ if executable('devicon-lookup')
 
     function! Fzf_GitFiles_Devicons(args, ...)
         if a:args !=? '?'
-            call Fzf_files_with_dev_icons('git ls-files|uniq')
+            call Fzf_files_with_dev_icons('git ls-files --others --no-ignored --exclude-standard --cached|uniq')
             return
         endif
         call Fzf_git_diff_files_with_dev_icons()
