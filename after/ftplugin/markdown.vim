@@ -7,3 +7,7 @@ setlocal nolist
 " Taken from https://castel.dev/post/lecture-notes-1/
 "" [I] <Ctrl>+l -- Auto correct current line
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+if functions#HasMacosApp('Marked')
+    "" [N] <Ctrl>+p -- Preview Markdown in Marked.app (macOS only) [macos]
+    nnoremap <expr> <C-p> ':silent !open -a Marked ' . expand('%') . '<CR>'
+endif

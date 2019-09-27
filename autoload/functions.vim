@@ -250,3 +250,8 @@ function! functions#TabMessage(cmd)
     silent put=message
   endif
 endfunction
+
+function! functions#HasMacosApp(appname)
+    let app_path=system('mdfind "'.a:appname.'" -onlyin /Applications')
+    return app_path !=? ''
+endfunction
