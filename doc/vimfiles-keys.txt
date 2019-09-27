@@ -13,58 +13,62 @@ Vimfiles Normal Mode Mappings                           *vimfiles-normal-keys*
 The mappings below are used in normal mode. They're listed in alphabetical
 order
 
-  `H...................` Go to the beggining of the line  
-  `L...................` Go the the end of the line  
-  `Q...................` Repeat last macro  
-  `Y...................` Copy from curent cursor position until EOL  
-  `ga..................` Easy Align (accepts motion) [easy-align]  
-  `gd..................` Go to definition [coc]  
-  `gi..................` Go to implementation [coc]  
-  `gr..................` Show references [coc]  
-  `gy..................` To to type definition [coc]  
-  `z=..................` Show spell suggestions [fzf]  
-  `<Bar>...............` Split window vertically  
-  `<C-h>...............` Go to pane to the right of the current one  
-  `<C-j>...............` Go to the pane below current one  
-  `<C-k>...............` Go to the pane above current one  
-  `<C-l>...............` Go to the pane to the left of the current one  
-  `<Down>..............` Make window smaller vertically  
-  `<Leader>O...........` Add a line at the end of file  
-  `<Leader>R...........` Save and source current file  
-  `<Leader>b...........` List open buffers [fzf]  
-  `<Leader>n...........` New file in the current folder  
-  `<Leader>o...........` Add a line at the beggining of the file  
-  `<Leader>p...........` Open latest closed file  
-  `<Left>..............` Make window larger horizontally  
-  `<M-d>...............` Close current buffer [sayonara]  
-  `<Right>.............` Make window smaller horizontally  
-  `<S-tab>.............` Previous buffer  
-  `<Up>................` Make window bigger vertically  
-  `<leader>a...........` Insert after current word under the cursor  
-  `<leader>box.........` Wrap line in ASCII box  
-  `<leader>cR..........` Restart Completion Service [coc]  
-  `<leader>cc..........` List available commands [coc]  
-  `<leader>cl..........` List linter errors [coc]  
-  `<leader>cr..........` Rename word under cursos [coc]  
-  `<leader>cx..........` Manage COC Extensions [coc]  
-  `<leader>ev..........` Edit $MYVIMRC  
-  `<leader>f...........` Fix current file [ALE]  
-  `<leader>i...........` Insert before current word under the cursor  
-  `<leader>j...........` Move current line {count}lines down  
-  `<leader>k...........` Move current line {count}lines up  
-  `<leader>l...........` Lint current file [ALE]  
-  `<leader>m...........` Edit the macro on any register (default *)  
-  `<leader>s...........` 'Slugify' word under cursor  
-  `<leader>tw..........` Toggle text wrapping  
-  `<leader>unbox.......` Remove ASCII box from around current text  
-  `<leader>$...........` Remove trailing spaces  
-  `<leader><CR>........` Join multiple empty lines, leaving just one  
-  `<leader><leader>....` List current project files [fzf]  
-  `<leader>=...........` Reindent file  
-  `<tab>...............` Next buffer  
-  `[c..................` Go to previous linter warning/error [ALE]  
-  `]c..................` Go to next linter warning/error [ALE]  
-  `_...................` Split Window Horizontally  
+  `H...................` Go to the beggining of the line
+  `L...................` Go the the end of the line
+  `Q...................` Repeat last macro
+  `Y...................` Copy from curent cursor position until EOL
+  `ga..................` Easy Align (accepts motion) [easy-align]
+  `gd..................` Go to definition [coc]
+  `gi..................` Go to implementation [coc]
+  `gr..................` Show references [coc]
+  `gy..................` To to type definition [coc]
+  `z=..................` Show spell suggestions [fzf]
+  `<Bar>...............` Split window vertically
+  `<Ctrl>+p............` Preview Markdown in Marked.app (macOS only) [macos]
+  `<C-h>...............` Go to pane to the right of the current one
+  `<C-j>...............` Go to the pane below current one
+  `<C-k>...............` Go to the pane above current one
+  `<C-l>...............` Go to the pane to the left of the current one
+  `<Down>..............` Make window smaller vertically
+  `<Leader>O...........` Add a line at the end of file
+  `<Leader>R...........` Save and source current file
+  `<Leader>b...........` List open buffers [fzf]
+  `<Leader>n...........` New file in the current folder
+  `<Leader>o...........` Add a line at the beggining of the file
+  `<Leader>p...........` Open latest closed file
+  `<Left>..............` Make window larger horizontally
+  `<M-d>...............` Close current buffer [sayonara]
+  `<Right>.............` Make window smaller horizontally
+  `<S-tab>.............` Previous buffer
+  `<Up>................` Make window bigger vertically
+  `<leader>a...........` Insert after current word under the cursor
+  `<leader>box.........` Wrap line in ASCII box
+  `<leader>cR..........` Restart Completion Service [coc]
+  `<leader>cc..........` List available commands [coc]
+  `<leader>cl..........` List linter errors [coc]
+  `<leader>cr..........` Rename word under cursos [coc]
+  `<leader>cx..........` Manage COC Extensions [coc]
+  `<leader>ev..........` Edit $MYVIMRC
+  `<leader>f...........` Fix current file [ALE]
+  `<leader>g...........` Toggle Goyo [goyo.vim]
+  `<leader>i...........` Insert before current word under the cursor
+  `<leader>j...........` Move current line {count}lines down
+  `<leader>k...........` Move current line {count}lines up
+  `<leader>l...........` Lint current file [ALE]
+  `<leader>m...........` Edit the macro on any register (default *)
+  `<leader>r...........` Toggle Symbols Sidebar [vista]
+  `<leader>s...........` Show files that were changed on git [fzf]
+  `<leader>s...........` 'Slugify' word under cursor
+  `<leader>tw..........` Toggle text wrapping
+  `<leader>unbox.......` Remove ASCII box from around current text
+  `<leader>$...........` Remove trailing spaces
+  `<leader><CR>........` Join multiple empty lines, leaving just one
+  `<leader><leader>....` List current project files [fzf]
+  `<leader>=...........` Reindent file
+  `<tab>...............` Next buffer
+  `[c..................` Go to previous linter warning/error [ALE]
+  `]c..................` Go to next linter warning/error [ALE]
+  `_...................` Split Window Horizontally
 
 Vimfiles Insert Mode Mappings                           *vimfiles-insert-keys*
 -----------------------------                                                 
@@ -72,11 +76,10 @@ Vimfiles Insert Mode Mappings                           *vimfiles-insert-keys*
 The mappings below are used in insert mode. They're listed in alphabetical
 order
 
-  `jj..................` Quickly return to normal mode  
-  `kk..................` Quickly return to normal mode  
-  `<TAB>...............` Autocomplete Trigger / Next Suggestion [coc]  
-  `<c-space>...........` Refresh suggestions [coc]  
-  `<expr><S-TAB>.......` Previous Suggestion [coc]  
+  `<Ctrl>+l............` Auto correct current line
+  `<S-TAB>.............` Previous Suggestion [coc]
+  `<TAB>...............` Autocomplete Trigger / Next Suggestion [coc]
+  `<c-space>...........` Refresh suggestions [coc]
 
 Vimfiles Other Mode Mappings                             *vimfiles-other-keys*
 ----------------------------                                                  
@@ -93,9 +96,9 @@ the square brackes indicates the mode of the command >
   C - Command-line mode
   O - Operator Pending
 <
-  `[V].<TAB>...........` Expand snippet [coc]  
-  `[V].<leader>s.......` 'Slugify' selected text  
-  `[X].ga..............` Easy Align Interactive Mode [easy-align]  
-  `[X].@...............` Run macro in all selected lines  
+  `[V].<TAB>...........` Expand snippet [coc]
+  `[V].<leader>s.......` 'Slugify' selected text
+  `[X].ga..............` Easy Align Interactive Mode [easy-align]
+  `[X].@...............` Run macro in all selected lines
 
 vim:tw=78:ts=8:ft=help:norl:

@@ -1,24 +1,26 @@
 #!/usr/bin/env bash
 vimpath=$(realpath "./")
+normal_pattern='^[[:space:]]*\"\" \[N\]'
+insert_pattern='^[[:space:]]*\"\" \[I\]'
 
 print_command_mapping() {
-    awk -F ' -- ' '{s=sprintf("`%-20s`",$1);gsub(/ /,".",s);printf "  %s", s;printf " %s  \n", $2}'
+    awk -F ' -- ' '{s=sprintf("`%-20s`",$1);gsub(/ /,".",s);printf "  %s", s;printf " %s\n", $2}'
 }
 
 grep_commands() {
     local commandType="$1"
     case "$commandType" in
     n | N)
-        grepPattern='^\"\" \[N\]'
+        grepPattern=${normal_pattern}
         ;;
     i | I)
-        grepPattern='^\"\" \[I\]'
+        grepPattern=${insert_pattern}
         ;;
     *)
-        grepPattern='^\"\" '
+        grepPattern='^[[:space:]]*\"\" '
         ;;
     esac
-    grep -h -E "${grepPattern}" ${vimpath}/config/mappings.vim ${vimpath}/extensions/*.vim
+    grep -h -E "${grepPattern}" ${vimpath}/config/*.vim ${vimpath}/after/ftplugin/*.vim ${vimpath}/after/plugin/*.vim ${vimpath}/extensions/*.vim
 }
 
 echo "=============================================================================="
@@ -38,6 +40,8 @@ echo "order"
 echo ""
 grep_commands "N" |
     sed 's/\[N\] //g' |
+    sed 's/^[[:space:]]*//g' |
+    sed 's/[[:space:]]*$//g' |
     sort -V |
     sed 's/: / -- /g' |
     sed 's/^"" //g' |
@@ -51,6 +55,8 @@ echo "order"
 echo ""
 grep_commands "I" |
     sed 's/\[I\] //g' |
+    sed 's/^[[:space:]]*//g' |
+    sed 's/[[:space:]]*$//g' |
     sort -V |
     sed 's/: / -- /g' |
     sed 's/^"" //g' |
@@ -72,11 +78,12 @@ echo "  C - Command-line mode"
 echo "  O - Operator Pending"
 echo "<"
 grep_commands |
-    grep -v -h -E '^\"\" \[N\]' |
-    grep -v -h -E '^\"\" \[I\]' |
+    grep -v -h -E "${normal_pattern}" |
+    grep -v -h -E "${insert_pattern}" |
     sort -V |
     sed 's/: / -- /g' |
     sed 's/^"" //g' |
+    sed 's/[[:space:]]*$//g' |
     print_command_mapping
 echo ""
 echo "vim:tw=78:ts=8:ft=help:norl:"

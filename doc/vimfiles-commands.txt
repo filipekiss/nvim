@@ -5,16 +5,16 @@ See: https://github.com/filipekiss
 
 Vimfiles Help Index: |VimFiles|
 
-  `:ALEDisableFixersBuffer.......` Disable Ale Fixers for current buffer [ale]  
-  `:ALEDisableFixersBuffer.......` Enable Ale Fixers for current buffer [ale]  
-  `:ALEDisableFixers.............` Disable Ale Fixers globally [ale]  
-  `:ALEEnableFixers..............` Enable Ale Fixers globally [ale]  
-  `:C............................` Clear hlsearch  
-  `:Del..........................` Delete current file and clear the buffer  
-  `:EditExtension.<name>.........` Edit the extension file with the given name  
-  `:FormatJSON...................` Format JSON in current buffer  
-  `:LightlineReload..............` Reload Lightline Configuration [lightline]  
-  `:Prettier.....................` Run Prettier in current file  
-  `:ReloadExtensions.............` Reload and install missing extensions  
+  `:ALEDisableFixersBuffer.......` Disable Ale Fixers for current buffer [ale]
+  `:ALEDisableFixersBuffer.......` Enable Ale Fixers for current buffer [ale]
+  `:ALEDisableFixers.............` Disable Ale Fixers globally [ale]
+  `:ALEEnableFixers..............` Enable Ale Fixers globally [ale]
+  `:C............................` Clear hlsearch
+  `:Del..........................` Delete current file and clear the buffer
+  `:EditExtension.<name>.........` Edit the extension file with the given name
+  `:FormatJSON...................` Format JSON in current buffer
+  `:LightlineReload..............` Reload Lightline Configuration [lightline]
+  `:ReloadExtensions.............` Reload and install missing extensions
+  `:TabMessage...................` Redirect the output of a command to a new tab
 
 vim:tw=78:ts=8:ft=help:norl:

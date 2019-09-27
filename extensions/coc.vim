@@ -40,7 +40,7 @@ inoremap <silent><expr> <TAB>
             \ pumvisible() ? "\<C-n>" :
             \ <SID>check_back_space() ? "\<TAB>" :
             \ coc#refresh()
-"" [I] <expr><S-TAB> -- Previous Suggestion [coc]
+"" [I] <S-TAB> -- Previous Suggestion [coc]
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
