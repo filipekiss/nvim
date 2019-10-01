@@ -170,24 +170,3 @@ nnoremap <leader>i bi
 
 "" [N] <leader>a -- Insert after current word under the cursor
 nnoremap <leader>a ea
-
-" I use this to make a nice boxed header:
-"
-" Tranform this:
-"
-"    A Code Comment
-"
-" Into this:
-"
-"   ┌──────────────┐
-"   │ Code Comment │
-"   └──────────────┘
-"
-" Added <Plug> mapping so I can make this repeatable with repeat.vim
-nnoremap <silent> <Plug>WrapInBox :normal! 0Wi│ A │"lyy"lp0wr└lv$r─$r┘^"lyyk"lPWr┌l$r┐<cr> :silent! call repeat#set("\<Plug>WrapInBox")<CR>
-"" [N] <leader>box -- Wrap line in ASCII box
-nmap <silent> <leader>box <Plug>WrapInBox
-" of course, we can also unbox the comment
-nnoremap <silent> <Plug>UnwrapFromBox :normal! 0W2x$xxjddkkddk<cr> :silent! call repeat#set("\<Plug>UnwrapFromBox")<CR>
-"" [N] <leader>unbox -- Remove ASCII box from around current text
-nmap <silent> <leader>unbox <Plug>UnwrapFromBox

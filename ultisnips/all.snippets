@@ -8,7 +8,35 @@ if commentChars[2] != commentChars[0]:
     endLineComment = commentChars[2]
 else:
     endLineComment = ""
+
+def clear_box_text():
+    snip.buffer[snip.line]=''
+    snip.cursor.set(snip.line,0)
 endglobal
+
+post_jump "if snip.tabstop == 0: clear_box_text()"
+snippet box "Box"
+`!p
+comment_char = snip.opt('&commentstring')
+box_text=t[1]
+longest_string_len = len(max(box_text.split("\n"), key=len))
+top='┌' + '─' * (longest_string_len + 2) + '┐'
+snip.rv = comment_char.replace('%s',  ' ' + top) if not (comment_char is None) else top
+`
+`!p
+comment_char = snip.opt('&commentstring')
+final = []
+for line in box_text.splitlines():
+    final.append(comment_char.replace('%s', ' │ ' + line.ljust(longest_string_len) + ' │ ') if not (comment_char is None) else '')
+snip.rv = "\n".join(final)
+`
+`!p
+comment_char = snip.opt('&commentstring')
+bottom='└' + '─' * (longest_string_len + 2) + '┘'
+snip.rv = comment_char.replace('%s',  ' ' + bottom) if not (comment_char is None) else bottom
+`
+$1
+endsnippet
 
 snippet cc "Comment"
 `!p snip.rv = firstLineComment`$0 `!p snip.rv = endLineComment`
