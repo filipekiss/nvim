@@ -20,7 +20,7 @@ let g:ale_open_list = 0
 let g:ale_set_signs = 1
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
-let g:ale_virtualtext_cursor = 1
+let g:ale_virtualtext_cursor = 0
 let g:ale_virtualtext_prefix = ' ' " \uf687
 " The icons are in order of precedence
 let g:ale_sign_error = '' " \uf66f
@@ -37,51 +37,39 @@ let g:ale_javascript_eslint_suppress_missing_config = 1
 let g:ale_javascript_eslint_suppress_eslintignore = 1
 let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_linters_explicit = 1
+function! s:PRETTIER_OPTIONS()
+  return '--config-precedence prefer-file --single-quote --no-bracket-spacing --prose-wrap always --trailing-comma all --semi --end-of-line  lf --print-width ' . &textwidth
+endfunction
+let g:ale_javascript_prettier_options = <SID>PRETTIER_OPTIONS()
+augroup PrettierTextWidth
+    " Auto update the option when textwidth is dynamically set or changed in a ftplugin file
+    au! OptionSet textwidth let g:ale_javascript_prettier_options = <SID>PRETTIER_OPTIONS()
+augroup END
 
 let g:ale_linters = {
-            \ 'javascript': ['eslint', 'xo'],
-            \ 'typescript': ['eslint', 'xo'],
-            \ 'vim': ['vint'],
-            \ 'markdown': ['alex'],
-            \ 'sh': ['shellcheck'],
-            \ 'bash': ['shellcheck'],
+            \ 'javascript' : ['eslint'],
+            \ 'typescript' : ['eslint'],
+            \ 'vim'        : ['vint'],
+            \ 'markdown'   : ['alex'],
+            \ 'sh'         : ['shellcheck'],
+            \ 'bash'       : ['shellcheck'],
             \}
 
 let g:ale_fixers = {
-            \ 'markdown': [
-            \   'prettier',
-            \ ],
-            \ 'javascript': [
-            \   'prettier',
-            \   'prettier_eslint',
-            \ ],
-            \ 'typescript': [
-            \   'prettier',
-            \   'prettier_eslint',
-            \ ],
-            \ 'typescript.tsx': [
-            \   'prettier',
-            \   'prettier_eslint',
-            \ ],
-            \ 'json': [
-            \   'prettier',
-            \ ],
-            \ 'css': [
-            \   'prettier',
-            \ ],
-            \ 'scss': [
-            \   'prettier',
-            \ ],
-            \ 'html': [
-            \ 'prettier',
-            \ ],
-            \ 'graphql': ['prettier'],
-            \ 'sh' : [
-            \ 'shfmt'
-            \ ],
-            \ 'bash' : [
-            \ 'shfmt'
-            \ ],
+            \ 'markdown'       : ['prettier'],
+            \ 'javascript'     : ['prettier'],
+            \ 'javascript.jsx' : ['prettier'],
+            \ 'javascriptreact' : ['prettier'],
+            \ 'typescript'     : ['prettier'],
+            \ 'typescript.tsx' : ['prettier'],
+            \ 'typescriptreact' : ['prettier'],
+            \ 'json'           : ['prettier'],
+            \ 'css'            : ['prettier'],
+            \ 'scss'           : ['prettier'],
+            \ 'html'           : ['prettier'],
+            \ 'graphql'        : ['prettier'],
+            \ 'sh'             : ['shfmt'],
+            \ 'bash'           : ['shfmt'],
             \}
 
 " Don't auto fix (format) files inside `node_modules`, minified files and jquery (for legacy codebases)
