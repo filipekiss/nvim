@@ -1,3 +1,4 @@
+set encoding=utf-8                                                        " set enconding to utf-8 by default
 scriptencoding utf-8
 " ┏━━━━━━━━━━━━━━━━━━━━━━━┓
 " ┃ Vim Specific Settings ┃
@@ -83,7 +84,6 @@ set completeopt-=preview                                                  " Don'
 " ┗━━━━━━━━━━━┛
 syntax sync minlines=256                                                  " start highlighting from 256 lines backwards
 set synmaxcol=300                                                         " do not highlight very long lines
-set encoding=utf-8                                                        " set enconding to utf-8 by default
 set hidden                                                                " Allow bufs to be sent to background
 set tildeop                                                               " Make tilde command behave like an operator.
 set shortmess+=A                                                          " ignore annoying swapfile messages

@@ -53,6 +53,13 @@ function! functions#NeatFoldText()
 endfunction
 
 function! functions#SetProjectDir(...)
+    " If we have a buffer project set, just use it and be done with it
+    let s:bufferProject= get(b:, 'projectFolder', '')
+    if (!empty(s:bufferProject))
+      echom 'Using buffer project'
+      lcd `=s:bufferProject`
+      return 
+    endif
     " Get current file dir
     let s:currentDir= (a:0 > 0 ? a:1 : expand('%:p:h'))
     let s:projectFolder = functions#GetProjectDir(s:currentDir)
@@ -71,25 +78,36 @@ function! functions#GetProjectDir(currentDir)
         return ''
     endif
     " Try to get a git top-level directory (this will return $HOME if not inside a git repo)
-    let s:gitDir = FindFileIn('.git', a:currentDir)
+    let s:gitDir = functions#FindFileIn('.git', a:currentDir)
+    let s:gitProjectDir = s:gitDir
+    let s:gitProjectDirWeight = len(s:gitDir)
     " Look for a package.json file
-    let s:jsProjectDir = FindFileIn('package.json', a:currentDir, s:gitDir)
+    let s:jsProjectDir = functions#FindFileIn('package.json', a:currentDir, s:gitDir)
     let s:jsProjectDirWeight = len(s:jsProjectDir)
-    " +IDEA: Maybe leave this up to something like projectionist.vim?
     " Look for a .local.vim
-    let s:vimProjectDir = FindFileIn('.local.vim', a:currentDir, s:gitDir)
-    let s:vimProjectDirWeight = len(s:vimProjectDir)
+    let s:vimProjectDir = functions#FindFileIn('.local.vim', a:currentDir, s:gitDir)
     " Check what is more specific between the git root project, the foler where we found either
     " package.json or .local.vim (basically the longest path wins, because that means it's more
     " specific)
-    let s:projectFolder = s:jsProjectDir
-    if (s:vimProjectDirWeight > s:jsProjectDirWeight)
-        let s:projectFolder = s:vimProjectDir
-    endif
+    let s:projectFolder = functions#FindLongestPath([s:gitDir, s:jsProjectDir, s:vimProjectDir])
     return s:projectFolder
 endfunction
 
-function! FindFileIn(filename, startingPath, ...)
+function! functions#FindLongestPath(paths)
+  let s:longestLength = 0
+  let s:longestIndex = 0 
+  let s:currentIndex = 0
+  for s:path in a:paths
+    if (len(s:path) > s:longestLength)
+      let s:longestLength = len(s:path)
+      let s:longestIndex = s:currentIndex
+    endif
+    let s:currentIndex += 1
+  endfor
+  return a:paths[s:longestIndex]
+endfunction
+
+function! functions#FindFileIn(filename, startingPath, ...)
     let s:searchUntil = get(a:, 1, $HOME)
     " If s:searchUntil is empty by now, means no $HOME is defined. We have no business here
     if (empty(s:searchUntil) || len(a:startingPath) < len(s:searchUntil))
@@ -98,17 +116,12 @@ function! FindFileIn(filename, startingPath, ...)
     if (a:filename ==? '.git')
         return GetGitDir(a:startingPath)
     endif
-    " If we are in the path already, just return it
-    if (a:startingPath == s:searchUntil)
-        return s:searchUntil
-    endif
     " If found <filename>, return the current folder
     if filereadable(a:startingPath . '/' . a:filename)
-        silent echom 'Found '.a:filename.' in ' . a:startingPath
         return a:startingPath
     endif
     " Recursively run this until a:startingPath is equal s:searchUntil
-    return FindFileIn(a:filename, fnamemodify(a:startingPath, ':h'), s:searchUntil)
+    return functions#FindFileIn(a:filename, fnamemodify(a:startingPath, ':h'), s:searchUntil)
 endfunction
 
 function! GetGitDir(path)
@@ -120,6 +133,18 @@ function! GetGitDir(path)
         let s:gitdir = $HOME
     endif
     return s:gitdir
+endfunction
+
+function! AutoWrapToggle()
+  if &formatoptions =~? 't'
+    setlocal formatoptions-=t
+    setlocal nowrap
+    echo 'nowrap'
+  else
+    setlocal formatoptions+=t
+    setlocal wrap
+    echo 'wrap'
+  endif
 endfunction
 
 function! AppendModeline()
@@ -242,7 +267,7 @@ function! functions#TabMessage(cmd)
   silent execute a:cmd
   redir END
   if empty(message)
-    echoerr "no output"
+    echoerr 'no output'
   else
     " use "new" instead of "tabnew" below if you prefer split windows instead of tabs
     tabnew

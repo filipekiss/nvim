@@ -36,8 +36,9 @@ function! setup#overrides() abort
     endif
 
     " Project specific override
-    let s:vimrc_project = getcwd() . '/.local.vim'
-    if filereadable(s:vimrc_project)
+    let s:vimrc_project_folder = functions#FindFileIn('.local.vim', getcwd())
+    let s:vimrc_project = s:vimrc_project_folder . '/.local.vim'
+    if filereadable(s:vimrc_project) && s:vimrc_project !=? s:vimrc_local
         execute 'source ' . s:vimrc_project
     endif
 endfunction
