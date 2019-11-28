@@ -30,10 +30,15 @@ map <expr> j v:count ? 'j' : 'gj'
 map <expr> k v:count ? 'k' : 'gk'
 
 " Quickly move current line up/down, also accepts counts 2<leader>j
+" and also works with visual selection
 "" [N] <leader>j -- Move current line {count}lines down
 "" [N] <leader>k -- Move current line {count}lines up
+"" [V] <leader>j -- Move current selection {count} lines down
+"" [V] <leader>k -- Move current selection {count} lines up
 nnoremap <leader>j :<c-u>execute 'move +'. v:count1<cr>
-nnoremap <leader>k :<c-u>execute 'move -1-'. v:count1<cr>
+nnoremap <leader>k :<c-u>execute 'move --'. v:count1<cr>
+xnoremap <leader>j :<c-u>execute "'<,'>move'>+" . v:count1<cr>gv
+xnoremap <leader>k :<c-u>execute "'<,'>move'<--" . v:count1<cr>gv
 
 " Make `Y` behave like `C` and `D` (to the end of line)
 "" [N] Y -- Copy from curent cursor position until EOL
@@ -117,7 +122,9 @@ nnoremap <expr><silent> <leader>q &diff ? ":windo bd<CR>" : ":quit<CR>"
 nnoremap <leader>m  :<c-u><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 
 "" [N] <leader>tw -- Toggle text wrapping
-nnoremap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
+nnoremap <silent> <leader>tw :call AutoWrapToggle()<CR>
+"" [I] <Ctrl>+B -- Toggle text wrapping when reaching &textwidth
+imap <C-B> :call AutoWrapToggle()<CR>
 
 " Resolve possible vimrc symlinks
 let $MYVIMRC = resolve(expand($MYVIMRC))

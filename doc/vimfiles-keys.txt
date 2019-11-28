@@ -42,7 +42,6 @@ order
   `<S-tab>.............` Previous buffer
   `<Up>................` Make window bigger vertically
   `<leader>a...........` Insert after current word under the cursor
-  `<leader>box.........` Wrap line in ASCII box
   `<leader>cR..........` Restart Completion Service [coc]
   `<leader>cc..........` List available commands [coc]
   `<leader>cl..........` List linter errors [coc]
@@ -60,7 +59,6 @@ order
   `<leader>s...........` Show files that were changed on git [fzf]
   `<leader>s...........` 'Slugify' word under cursor
   `<leader>tw..........` Toggle text wrapping
-  `<leader>unbox.......` Remove ASCII box from around current text
   `<leader>$...........` Remove trailing spaces
   `<leader><CR>........` Join multiple empty lines, leaving just one
   `<leader><leader>....` List current project files [fzf]
@@ -76,6 +74,7 @@ Vimfiles Insert Mode Mappings                           *vimfiles-insert-keys*
 The mappings below are used in insert mode. They're listed in alphabetical
 order
 
+  `<Ctrl>+B............` Toggle text wrapping when reaching &textwidth
   `<Ctrl>+l............` Auto correct current line
   `<S-TAB>.............` Previous Suggestion [coc]
   `<TAB>...............` Autocomplete Trigger / Next Suggestion [coc]
@@ -97,6 +96,8 @@ the square brackes indicates the mode of the command >
   O - Operator Pending
 <
   `[V].<TAB>...........` Expand snippet [coc]
+  `[V].<leader>j.......` Move current selection {count} lines down
+  `[V].<leader>k.......` Move current selection {count} lines up
   `[V].<leader>s.......` 'Slugify' selected text
   `[X].ga..............` Easy Align Interactive Mode [easy-align]
   `[X].@...............` Run macro in all selected lines
