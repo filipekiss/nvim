@@ -3,11 +3,7 @@ SHELL=bash
 
 # Makefile variables
 # Set path to nvim
-vim := $(shell which nvim)
-ifeq ($(strip $(vim)),)
-	# If nvim is not on path, use vim
-	vim := $(shell which vim)
-endif
+nvim := $(shell which nvim)
 # Current folder location resolved
 pwd := $(shell pwd -LP)
 # Vim Plug Lockfile
@@ -25,21 +21,21 @@ DESCRIPTION_SIZE := $((COLUMNS/3))
 ## Print this help
 .PHONY: help
 help:
-	@printf "VimFiles\n\n"
+	@printf "NvimFiles\n\n"
 	@printf "USAGE:\n"
 	@printf "┌"
 	@printf "%.0s━" {4..$(COLUMNS)}
 	@printf "┐\n"
 
 	@awk '{ \
-			if ($$0 ~ /^.PHONY: [a-zA-Z\-\_0-9]+$$/) { \
+			if ($$0 ~ /^.PHONY: [a-zA-Z\-_0-9]+$$/) { \
 				helpCommand = substr($$0, index($$0, ":") + 2); \
 				if (helpMessage) { \
 					printf "│\033[36m  %-17s\033[0m│ %-56s│\n", \
 						helpCommand, helpMessage; \
 					helpMessage = ""; \
 				} \
-			} else if ($$0 ~ /^[a-zA-Z\-\_0-9.]+:/) { \
+			} else if ($$0 ~ /^[a-zA-Z\-_0-9.]+:/) { \
 				helpCommand = substr($$0, 0, index($$0, ":")); \
 				if (helpMessage) { \
 					printf "\033[36m%-20s\033[0m %s\n", \
@@ -64,37 +60,30 @@ help:
 	@printf "%.0s━" {4..$(COLUMNS)}
 	@printf "┘"
 
-## Run everything needed
+## Link config, generate docs and install extensions
 .PHONY: magic
 magic: link docs packages restore
 
-## Link cwd to ~/.vim and ~/.config/nvim
+## Link cwd to ~/.config/nvim
 .PHONY: link
-link: link-vim link-neovim
-
-.PHONY: link-vim
-link-vim:
-	@echo "→ ~/.vim"
-	@if [ ! . -ef ~/.vim ]; then ln -nfs "${pwd}" ~/.vim; fi
-	@echo "→ ~/.vimrc"
-	@ln -nfs "${pwd}/init.vim" ~/.vimrc
+link: link-neovim
 
 .PHONY: link-neovim
 link-neovim:
 	@mkdir -p ~/.config
 	@echo "→ ~/.config/nvim"
 	@if [ ! . -ef ~/.config/nvim ]; then ln -nfs "${pwd}" ~/.config/nvim; fi
-	@$(vim) "+helptags $(pwd)/doc" +qa
+	@$(nvim) "+helptags $(pwd)/doc" +qa
 
-## Runs :PlugInstall
+## Runs :PlugInstall (install plugins)
 .PHONY: install
 install:
-	@$(vim) --cmd "let g:fck_extensions_ignore_local = 1"  +PlugInstall +PlugClean +"PlugSnapshot ${lockfile}" +qa
+	@$(nvim) --cmd "let g:fck_extensions_ignore_local = 1"  +PlugInstall +PlugClean +"PlugSnapshot ${lockfile}" +qa
 
 ## Runs :PlugUpdate (updates plugins)
 .PHONY: upgrade
 upgrade:
-	@$(vim) --cmd "let g:fck_extensions_ignore_local = 1" +PlugUpdate +PlugUpgrade +PlugClean +"PlugSnapshot ${lockfile}" +PlugDiff
+	@$(nvim) --cmd "let g:fck_extensions_ignore_local = 1" +PlugUpdate +PlugUpgrade +PlugClean +"PlugSnapshot ${lockfile}" +PlugDiff
 
 ## Install required external packages
 .PHONY: packages
@@ -106,12 +95,12 @@ packages:
 ## Install plugins from lockfile
 .PHONY: restore
 restore:
-	$(vim) -S ${lockfile}
+	$(nvim) -S ${lockfile}
 
 ## Generate documentation (:h VimFiles)
 .PHONY: docs
 docs: doc/vimfiles-keys.txt doc/vimfiles-commands.txt
-	@$(vim) "+helptags $(pwd)/doc" +qa
+	@$(nvim) "+helptags $(pwd)/doc" +qa
 
 doc: docs
 
