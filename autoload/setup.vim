@@ -19,6 +19,7 @@ function! setup#init() abort
     call setup#load('autocmds')
     call setup#load('colors')
     call extensions#configure()
+    lua require 'init'
 endfunction
 
 function! setup#load(file) abort
