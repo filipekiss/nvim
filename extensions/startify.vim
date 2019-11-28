@@ -32,7 +32,8 @@ let g:startify_custom_header_quotes =  [
             \ ['Without requirements or design, programming is the art of adding bugs to an empty text file', '', '- Louis Srygley'],
             \ ['There are 2 hard problems in computer science: cache invalidation, naming things, and off-by-1 errors', '', '- Leon Bambrick'],
             \ ['The world has too many Jira tickets as it is', '', '- Dave Geddes'],
-            \ ["We're all in it together", '', '- Keanu Reeves']
+            \ ["We're all in it together", '', '- Keanu Reeves'],
+            \ ['Life is like riding a bicycle. To keep your balance, you must keep moving.', '', '- Albert Einstein'],
             \ ]
 
 let g:startify_custom_header = 'map(startify#fortune#boxed(), "repeat(\" \", 5).v:val")'
