@@ -19,4 +19,10 @@ snippet @cmd "Commands docblock" b
 "# ${1::Command} -- ${2:Command Description} ${3:[${4:plugin}]}
 endsnippet
 
+snippet function "" b
+function! ${1:${2:autoload}#${3:function}}(${4:...}) abort
+$0
+endfunction
+endsnippet
+
 # vim: set ts=4 sw=4 tw=80 ft=snippets noet :

@@ -15,3 +15,13 @@ _parse_arguments() {
 endsnippet
 
 
+snippet debug "Debug function" b
+_debug() {
+    local BLACK BOLD WHITE RESET
+    WHITE=$(tput setaf 7)
+    BOLD=$(tput bold)
+    RESET=$(tput sgr0)
+    BLACK=$(tput setaf 0)
+    printf >&2 "${BOLD}${BLACK}[%s] debug${RESET} ${WHITE}%s${RESET}\n" "$(date +"%H:%M:%S")" "$@"
+}
+endsnippet

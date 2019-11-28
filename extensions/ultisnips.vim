@@ -17,6 +17,7 @@ let g:UltiSnipsListSnippets = '<Plug>(ultisnips_list)'
 let g:UltiSnipsRemoveSelectModeMappings = 0
 let g:UltiSnipsSnippetsDir=$VIMHOME . '/ultisnips'
 let g:UltiSnipsSnippetDirectories=[
-            \ $VIMHOME . '/ultisnips'
+            \ $VIMHOME . '/ultisnips',
+            \ $HOME . '/.ultisnips'
             \ ]
 let g:UltiSnipsEditSplit='context'

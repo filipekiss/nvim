@@ -21,6 +21,23 @@ def create_table(snip):
 
     # expand anonymous snippet
     snip.expand_anon(anon_snippet_table)
+
+def project_name(project_name):
+	return project_name.split('/')[-1]
+
+def github_username(project_name):
+    organization_name = project_name.split('/')
+    if len(organization_name) > 1:
+        return organization_name[0]
+    return "filipekiss"
+
+def license_display(license_string, license_type):
+    has_license_string = len(license_string) > 0
+    if has_license_string and license_type == 'MIT':
+        return "\n"+'['+license_type+']: http://mit-license.org'
+    if has_license_string:
+        return "\n"+'['+license_type+']: LICENSE.md'
+    return ''
 endglobal
 
 snippet ch "1989-12-09 - 1.0.0"
@@ -40,14 +57,13 @@ snippet img "Image" w
 endsnippet
 
 snippet "^thanks" "" rbA
-**${1:projectname}** © `date +"%Y"`+, `echo ${FULLNAME:-Filipe Kiss}` Released under the [MIT] License.<br>
-Authored and maintained by `echo ${FULLNAME:-Filipe Kiss}`${2: with help from contributors ([list][contributors])}.
+**${1:projectname}** © `date +"%Y"`+, `echo ${FULLNAME:-Filipe Kiss}`${2: Released under the [${3:MIT}] License}.<br>
+Authored and maintained by `echo ${FULLNAME:-Filipe Kiss}` with help from [contributors].
 
-> GitHub [@`echo ${GITHUB_USER:-filipekiss}`](https://github.com/`echo ${GITHUB_USER:-filipekiss}`) &nbsp;&middot;&nbsp;
-> Twitter [@`echo ${GITHUB_USER:-filipekiss}`](https://twitter.com/`echo ${GITHUB_USER:-filipekiss}`)
-
-[MIT]: http://mit-license.org/
-${3:[contributors]: http://github.com/`echo ${GITHUB_USER:-filipekiss}`/$1/contributors}
+> GitHub [@`!p snip.rv = github_username(t[1])`](https://github.com/`!p snip.rv = github_username(t[1])`) &nbsp;&middot;&nbsp;
+> Twitter [@`echo ${TWITTER_USER:-filipekiss}`](https://twitter.com/`echo ${TWITTER_USER:-filipekiss}`)
+`!p snip.rv = license_display(t[2], t[3])`
+[contributors]: http://github.com/`!p snip.rv = github_username(t[1])`/`!p snip.rv = project_name(t[1])`/contributors
 endsnippet
 
 snippet "^collab" "" rbA
@@ -68,4 +84,12 @@ endsnippet
 pre_expand "create_table(snip)"
 snippet "tb(\d+x\d+)" "Customizable table" br
 endsnippet
+
 # vim:ft=snippets:
+
+
+
+snippet printf
+printf("${1:%s}\n"${1/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$2${1/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet
+
