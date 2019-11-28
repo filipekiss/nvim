@@ -10,6 +10,7 @@ let s:coc_extensions = [
             \ 'coc-lists',
             \ 'coc-tsserver',
             \ 'coc-ultisnips',
+            \ 'coc-omni'
             \ ]
 
 
@@ -18,17 +19,18 @@ function! s:coc_hook(info) abort
     call coc#util#install_extension(get(s:, 'coc_extensions', []))
 endfunction
 
+let g:coc_extension_root = $VIMHOME . '/coc/extensions'
+
 if extensions#isInstalling()
     call extensions#loadExtension('https://github.com/Shougo/neco-vim')
     call extensions#loadExtension('https://github.com/neoclide/coc-neco')
-    call extensions#loadExtension('https://github.com/neoclide/coc.nvim', { 'tag': '*', 'do': function('s:coc_hook') })
+    call extensions#loadExtension('https://github.com/neoclide/coc.nvim', { 'branch': 'release', 'do': function('s:coc_hook') })
     finish
 endif
 
-let g:coc_extension_root = $VIMHOME . '/coc/extensions'
 
-let g:coc_snippet_next='<c-j>'
-let g:coc_snippet_prev='<c-k>'
+let g:coc_snippet_next='<c-n>'
+let g:coc_snippet_prev='<c-p>'
 
 function! s:check_back_space() abort
     let col = col('.') - 1

@@ -1,16 +1,25 @@
 {
-    "suggest.noselect": true,
-    "suggest.autoTrigger": "always",
-    "suggest.echodocSupport": true,
-    "coc.preferences.colorSupport": true,
-    "diagnostic.enable": true,
-    "diagnostic.displayByAle": true,
-    "diagnostic.locationlist": true,
-    "diagnostic.enableMessage": "never",
-    "highlight.colors.enable": true,
-    "highlight.disableLanguages": ["vim"],
-    "emmet.includeLanguages": {
-        "javascript": "javascriptreact"
-    },
-    "javascript.suggestionActions.enabled": false
+	"coc.preferences.colorSupport": false,
+	"suggest.autoTrigger": "trigger",
+	"suggest.noselect": true,
+	"suggest.echodocSupport": true,
+	"suggest.floatEnable": true,
+	"diagnostic.enable": true,
+	"diagnostic.displayByAle": false,
+	"diagnostic.messageTarget": "float",
+	"diagnostic.refreshOnInsertMode": true,
+	"git.enableGutters": false,
+	"git.addedSign.text": "+",
+	"git.changedSign.text": "~",
+	"git.removedSign.text": "-",
+	"git.topRemovedSign.text": "-",
+	"git.changeRemovedSign.text": "-",
+	"diagnostic.hintSign": "",
+	"diagnostic.infoSign": "",
+	"diagnostic.errorSign": "✖",
+	"diagnostic.warningSign": "",
+	"emmet.includeLanguages": {
+		"javascript": "javascriptreact",
+		"typescript": "typescriptreact"
+	}
 }
