@@ -101,7 +101,7 @@ endif
 set noshowmode                                                            " Don't Display the mode you're in. since it's already shown on the statusline
 set diffopt+=vertical                                                     " Split diffs vertically
 if has('nvim')
-    set inccommand=nosplit                                                " incremental command live feedback
+    set inccommand=split                                                  " incremental command live feedback
 endif
 if exists('&belloff')
     set belloff=all                                                       " never ring the bell for any reason
@@ -163,11 +163,11 @@ set wildignore+=tags                                                      " …(
 " ┏━━━━━━━━━━━━━┓
 " ┃ Text Format ┃
 " ┗━━━━━━━━━━━━━┛
-set expandtab                                                             " always use spaces instead of tabs
+" set expandtab                                                             " always use spaces instead of tabs
 set tabstop=4                                                             " units per tab
-set softtabstop=4                                                         " spaces per tab
+" set softtabstop=4                                                         " spaces per tab
+" set shiftwidth=4                                                          " spaces per tab (when shifting)
 set shiftround                                                            " always indent by multiple of shiftwidth
-set shiftwidth=4                                                          " spaces per tab (when shifting)
 set nowrap                                                                " no wrap
 set textwidth=80                                                          " maximum text width
 if has('folding')
