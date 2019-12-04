@@ -1,5 +1,5 @@
 " Explicitily set $VIMHOME
-let $VIMHOME=expand('~/.vim')
+let $VIMHOME=expand('~/.config/nvim')
 
 " Add $VIMHOME/after to runtimepath
 " :h 'runtimepath'
