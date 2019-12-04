@@ -107,4 +107,5 @@ augroup COC_SIGNATURE
     autocmd CursorHold * silent call CocActionAsync('highlight')
     autocmd BufWritePost extensions/coc.vim source % | CocRestart
     autocmd BufWritePost coc-settings.json CocRestart
+    autocmd BufWritePost tsconfig.json CocRestart
 augroup end
