@@ -1,9 +1,10 @@
 scriptencoding utf-8
 
-" ┌────────┐
-" │ Leader │
-" └────────┘
-let g:mapleader="\<Space>"
+" ┌─────────────────────────┐
+" │ Leader and local leader │
+" └─────────────────────────┘
+let mapleader="\<Space>"
+let localleader=','
 
 " ┌──────────────────────┐
 " │ Cursor/Text Movement │
