@@ -21,4 +21,5 @@ function! abolish#after() abort
     Abolish realted         related
     Abolish withouth without
     Abolish reponsive responsive
+    Abolish cosnt const
 endfunction

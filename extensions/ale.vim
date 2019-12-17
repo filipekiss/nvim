@@ -154,7 +154,5 @@ command! ALEEnableFixersBuffer  let b:ale_fix_on_save=1
 nmap <silent> <leader>l :ALELint<CR>
 "" [N] <leader>f -- Fix current file [ALE]
 nmap <silent> <leader>f :ALEFix<CR>
-"" [N] ]c -- Go to next linter warning/error [ALE]
-nmap <silent> ]c :ALENextWrap<CR>
-"" [N] [c -- Go to previous linter warning/error [ALE]
-nmap <silent> [c :ALEPreviousWrap<CR>
+"" [N] ]] -- Open error detail [ALE]
+nmap <silent> <leader>] :ALEDetail<CR>

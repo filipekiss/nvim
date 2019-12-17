@@ -2,6 +2,8 @@
 
 > My neovim configuration
 
+###### ⚠️ This configuration is not intended to be used with Vim. My daily editor is NeoVim and Vim is left as vanilla as it can be on my machines. ⚠️
+
 ## Installation
 
 **1. Clone the repository**

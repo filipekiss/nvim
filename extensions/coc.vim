@@ -9,8 +9,6 @@ let s:coc_extensions = [
             \ 'coc-json',
             \ 'coc-lists',
             \ 'coc-tsserver',
-            \ 'coc-ultisnips',
-            \ 'coc-omni'
             \ ]
 
 
@@ -29,8 +27,8 @@ if extensions#isInstalling()
 endif
 
 
-let g:coc_snippet_next='<c-n>'
-let g:coc_snippet_prev='<c-p>'
+let g:coc_snippet_next='<Tab>'
+let g:coc_snippet_prev='<S-Tab>'
 
 function! s:check_back_space() abort
     let col = col('.') - 1
@@ -39,9 +37,10 @@ endfunction
 
 "" [I] <TAB> -- Autocomplete Trigger / Next Suggestion [coc]
 inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
+      \ pumvisible() ? "\<C-n>" :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
 "" [I] <S-TAB> -- Previous Suggestion [coc]
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
@@ -79,10 +78,6 @@ nnoremap <silent> <leader>cc :<C-u>CocList commands<cr>
 "" [N] <leader>cR -- Restart Completion Service [coc]
 nnoremap <silent> <leader>cR :<C-u>CocRestart<CR>
 
-" manage extensions
-"" [N] <leader>cx -- Manage COC Extensions [coc]
-nnoremap <silent> <leader>cx :<C-u>CocList --normal extensions<cr>
-
 " rename the current word in the cursor
 "" [N] <leader>cr -- Rename word under cursos [coc]
 nmap <leader>cr  <Plug>(coc-rename)
@@ -90,6 +85,14 @@ nmap <leader>cr  <Plug>(coc-rename)
 " Expand snippets
 "" [V] <TAB> -- Expand snippet [coc]
 vmap <TAB> <Plug>(coc-snippets-select)
+"" [N] ]e -- Go to next linter error [coc]
+nmap ]e <Plug>(coc-diagnostic-next-error)
+"" [N] [e -- Go to previous linter error [ALE]
+nmap [e <Plug>(coc-diagnostic-prev-error)
+"" [N] ]d -- Go to next linter warning/error [coc]
+nmap ]d <Plug>(coc-diagnostic-next)
+"" [N] [d -- Go to previous linter warning/error [ALE]
+nmap [d <Plug>(coc-diagnostic-prev)
 
 function! s:show_documentation()
     if (&filetype ==# 'vim' || &filetype ==# 'help')

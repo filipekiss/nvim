@@ -1,11 +1,11 @@
 {
 	"coc.preferences.colorSupport": false,
-	"suggest.autoTrigger": "trigger",
+	"suggest.autoTrigger": "always",
 	"suggest.noselect": true,
 	"suggest.echodocSupport": true,
 	"suggest.floatEnable": true,
 	"diagnostic.enable": true,
-	"diagnostic.displayByAle": false,
+	"diagnostic.displayByAle": true,
 	"diagnostic.messageTarget": "float",
 	"diagnostic.refreshOnInsertMode": true,
 	"git.enableGutters": false,
@@ -17,9 +17,5 @@
 	"diagnostic.hintSign": "",
 	"diagnostic.infoSign": "",
 	"diagnostic.errorSign": "✖",
-	"diagnostic.warningSign": "",
-	"emmet.includeLanguages": {
-		"javascript": "javascriptreact",
-		"typescript": "typescriptreact"
-	}
+	"diagnostic.warningSign": ""
 }
