@@ -4,13 +4,20 @@ scriptencoding utf-8
 
 if extensions#isInstalling()
     call extensions#loadExtension('https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
-call extensions#loadExtension('https://github.com/junegunn/fzf.vim')
+    call extensions#loadExtension('https://github.com/junegunn/fzf.vim')
     finish
 endif
 
 if extensions#isMissing('fzf.vim', 'fzf.vim')
     finish
 endif
+let g:fzf_action = {
+            \ 'return': 'tabedit',
+            \ 'ctrl-t': 'tab split',
+            \ 'ctrl-x': 'split',
+            \ 'ctrl-v': 'vsplit',
+            \ 'ctrl-e': 'edit'
+            \}
 
 let g:fzf_files_options = $FZF_CTRL_T_OPTS
 let g:fzf_layout = { 'window': functions#fzf_window() }
@@ -51,22 +58,46 @@ endfunction
 
 function! FzfSpell()
     let suggestions = spellsuggest(expand('<cword>'))
-return fzf#run({'source': suggestions, 'sink': function('FzfSpellSink'), 'down': 10 })
+    return fzf#run({'source': suggestions, 'sink': function('FzfSpellSink'), 'down': 10 })
 endfunction
 "" [N] z= -- Show spell suggestions [fzf]
 nnoremap z= :call FzfSpell()<CR>
 
 " This is here mostly thanks to https://coreyja.com/vim-fzf-with-devicons/
 if executable('devicon-lookup')
+    let s:bindings = '--expect=ctrl-t,ctrl-v,ctrl-x,ctrl-e --delimiter :'
+
+    let s:default_action = {
+                \ 'ctrl-t': 'tab split',
+                \ 'ctrl-x': 'split',
+                \ 'ctrl-v': 'vsplit',
+                \ 'ctrl-e': 'edit'}
+
+    function! s:action_for(key, ...)
+        let default = a:0 ? a:1 : 'tab split'
+        let Cmd = get(get(g:, 'fzf_action', s:default_action), a:key, default)
+        return type(Cmd) == type('') ? Cmd : default
+    endfunction
+
+    function! s:handle_filename(filename, pad)
+        let size = a:pad
+        return a:filename[size:-1]
+    endfunction
+
     function! Fzf_files_with_dev_icons(command)
-        let l:fzf_files_options = '--preview "bat --color always --style numbers {2..} | head -'.&lines.'"'
-        function! s:edit_devicon_prepended_file(item)
-            let l:file_path = a:item[4:-1]
-            execute 'silent e' l:file_path
+        let l:fzf_files_options = s:bindings . ' --preview "bat --color always --style numbers {2..} | head -'.&lines.'"'
+        function! s:edit_devicon_prepended_file(name)
+            if len(a:name) < 2 | return | endif
+
+            let s:cmd = s:action_for(a:name[0])
+            for file in a:name[1:-1]
+                execute 'silent '.s:cmd.' '.s:handle_filename(file, 4)
+            endfor
         endfunction
+
         let l:fzf_options = {
                     \ 'source': a:command.' | devicon-lookup',
-                    \ 'sink':   function('s:edit_devicon_prepended_file'),
+                    \ 'sink*':   function('s:edit_devicon_prepended_file'),
                     \ 'options': '-m ' . l:fzf_files_options
                     \}
         if  exists('g:fzf_layout')
@@ -76,18 +107,22 @@ if executable('devicon-lookup')
     endfunction
 
     function! Fzf_git_diff_files_with_dev_icons()
-        let l:fzf_files_options = '--ansi --preview "sh -c \"(git diff --color=always -- {3..} | sed 1,4d; bat --color always --style numbers {3..}) | head -'.&lines.'\""'
-        function! s:edit_devicon_prepended_file_diff(item)
-            echom a:item
-            let l:file_path = a:item[7:-1]
-            echom l:file_path
-            let l:first_diff_line_number = system('git diff -U0 '.l:file_path." | rg '^@@.*\+' -o | rg '[0-9]+' -o | head -1")
-            execute 'silent e' l:file_path
-            execute l:first_diff_line_number
+        let l:fzf_files_options = s:bindings . ' --ansi --preview "sh -c \"(git diff --color=always -- {3..} | sed 1,4d; bat --color always --style numbers {3..}) | head -'.&lines.'\""'
+        function! s:edit_devicon_prepended_file_diff(name)
+            if len(a:name) < 2 | return | endif
+
+            let s:cmd = s:action_for(a:name[0])
+            for file in a:name[1:-1]
+                let l:file_path = s:handle_filename(file, 7)
+                let l:first_diff_line_number = system('git diff -U0 '.l:file_path." | rg '^@@.*\+' -o | rg '[0-9]+' -o | head -1")
+                execute 'silent '.s:cmd.' '.l:file_path
+                execute l:first_diff_line_number
+            endfor
         endfunction
+
         let l:fzf_options = {
                     \ 'source': 'git -c color.status=always status --short --untracked-files=all | devicon-lookup',
-                    \ 'sink':   function('s:edit_devicon_prepended_file_diff'),
+                    \ 'sink*':   function('s:edit_devicon_prepended_file_diff'),
                     \ 'options': '-m ' . l:fzf_files_options,}
         if  exists('g:fzf_layout')
             call extend(l:fzf_options, g:fzf_layout)

@@ -106,10 +106,17 @@ nnoremap <C-l> <C-w><C-l>
 nnoremap <expr><silent> <Bar> v:count == 0 ? "<C-W>v<C-W><Right>" : ":<C-U>normal! 0".v:count."<Bar><CR>"
 nnoremap <expr><silent> _     v:count == 0 ? "<C-W>s<C-W><Down>"  : ":<C-U>normal! ".v:count."_<CR>"
 
-"" [N] <tab> -- Next buffer
-"" [N] <S-tab> -- Previous buffer
-nnoremap <tab>   :bnext<CR>
-nnoremap <S-tab> :bprevious<CR>
+"" [N] <tab> -- Next tab
+"" [N] <S-tab> -- Previous tab
+nnoremap <tab>   :tabnext<CR>
+nnoremap <S-tab> :tabprevious<CR>
+
+"" [N] ;n -- Next Buffer
+nnoremap ;n :bnext<CR>
+"" [N] ;p -- Previous Buffer
+nnoremap ;p :bprevious<CR>
+" [N] ;; -- repeat f/F/t/T
+nnoremap ;; ;          
 
 " ┌──────────────────┐
 " │ Utility Mappings │

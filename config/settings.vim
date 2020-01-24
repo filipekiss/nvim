@@ -70,6 +70,7 @@ set lazyredraw                                                            " don'
 set showmatch                                                             " show matching bracket
 set title                                                                 " show filename at the title of the window
 set nocursorcolumn                                                        " do not highlight column
+set showtabline=2                                                         " always show tabline
 
 " ┏━━━━━━━━━━━━━━━━━━━━━┓
 " ┃ Completion Settings ┃
