@@ -8,7 +8,7 @@ if extensions#isInstalling()
 endif
 
 if extensions#isInstalled('tag-peek.vim', 'tag_peek.vim', 'autoload')
-    nnoremap <silent> <C-o>  :call tag_peek#ShowTag()<CR>
+    nnoremap <silent> <localleader>p  :call tag_peek#ShowTag()<CR>
 
         function! TagPeekFloat()
             " Make the floating window relative to the line it was called

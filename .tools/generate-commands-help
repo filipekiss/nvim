@@ -2,7 +2,7 @@
 vimpath=$(realpath "./")
 
 print_command_mapping() {
-    awk -F ' -- ' '{s=sprintf("`%-30s`",$1);gsub(/ /,".",s);printf "  %s", s;printf " %s\n", $2}'
+    awk -F ' -- ' '{s=sprintf("`%-30s`",$1);gsub(/ [ ]/,"..",s);gsub(/ `/,".`",s);printf "  %s", s;printf " %s\n", $2}'
 }
 
 echo "=============================================================================="

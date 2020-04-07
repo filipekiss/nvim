@@ -11,3 +11,5 @@ if functions#HasMacosApp('Marked')
     "" [N] <Ctrl>+p -- Preview Markdown in Marked.app (macOS only) [macos]
     nnoremap <expr> <C-p> ':silent !open -a Marked ' . expand('%') . '<CR>'
 endif
+
+let b:undo_ftplugin = 'setlocal linebreak< conceallevel< spell< nolist<'

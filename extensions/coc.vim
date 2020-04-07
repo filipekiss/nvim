@@ -9,6 +9,8 @@ let s:coc_extensions = [
             \ 'coc-json',
             \ 'coc-lists',
             \ 'coc-tsserver',
+            \ 'coc-vimlsp',
+            \ 'coc-cssmodules'
             \ ]
 
 
@@ -17,11 +19,9 @@ function! s:coc_hook(info) abort
     call coc#util#install_extension(get(s:, 'coc_extensions', []))
 endfunction
 
-let g:coc_extension_root = $VIMHOME . '/coc/extensions'
+let g:coc_data_home = $VIMHOME . '/coc/extensions'
 
 if extensions#isInstalling()
-    call extensions#loadExtension('https://github.com/Shougo/neco-vim')
-    call extensions#loadExtension('https://github.com/neoclide/coc-neco')
     call extensions#loadExtension('https://github.com/neoclide/coc.nvim', { 'branch': 'release', 'do': function('s:coc_hook') })
     finish
 endif
@@ -76,11 +76,12 @@ nnoremap <silent> <leader>cc :<C-u>CocList commands<cr>
 
 " restart when tsserver gets wonky
 "" [N] <leader>cR -- Restart Completion Service [coc]
-nnoremap <silent> <leader>cR :<C-u>CocRestart<CR>
+nnoremap <silent> <leader>cx :<C-u>CocRestart<CR>
 
 " rename the current word in the cursor
 "" [N] <leader>cr -- Rename word under cursos [coc]
 nmap <leader>cr  <Plug>(coc-rename)
+nmap <leader>cR  <Plug>(coc-refactor)
 
 " Expand snippets
 "" [V] <TAB> -- Expand snippet [coc]
@@ -110,5 +111,5 @@ augroup COC_SIGNATURE
     autocmd CursorHold * silent call CocActionAsync('highlight')
     autocmd BufWritePost extensions/coc.vim source % | CocRestart
     autocmd BufWritePost coc-settings.json CocRestart
-    autocmd BufWritePost tsconfig.json CocRestart
+    autocmd BufWritePost tsconfig.json,tsconfig.*.json CocRestart
 augroup end

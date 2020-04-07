@@ -1,5 +1,6 @@
 set encoding=utf-8                                                        " set enconding to utf-8 by default
 scriptencoding utf-8
+
 " ┏━━━━━━━━━━━━━━━━━━━━━━━┓
 " ┃ Vim Specific Settings ┃
 " ┠━━━━━━━━━━━━━━━━━━━━━━━┸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -10,7 +11,7 @@ scriptencoding utf-8
 if !has('nvim')
     set autoindent                                                        " maintain indent of current line
     set backspace=indent,start,eol                                        " allow unrestricted backspacing in insert mode
-    set display+=lastline                                                 " Display as much as possibe of a window's last line.
+    set display+=lastline                                                 " Display as much as possible of a window's last line.
     set laststatus=2                                                      " Show status in all windows
     set ttyfast                                                           " Ensure fast terminal is reported
                                                                           " Ensure true-color works inside TMUX
@@ -71,6 +72,9 @@ set showmatch                                                             " show
 set title                                                                 " show filename at the title of the window
 set nocursorcolumn                                                        " do not highlight column
 set showtabline=2                                                         " always show tabline
+if exists('+emoji')
+    set noemoji                                                           " handle emoji correctly (https://www.youtube.com/watch?v=F91VWOelFNE)
+endif
 
 " ┏━━━━━━━━━━━━━━━━━━━━━┓
 " ┃ Completion Settings ┃
@@ -127,6 +131,7 @@ if has('virtualedit')
 endif
 set whichwrap=b,h,l,s,<,>,[,],~                                           " allow <BS>/h/l/<Left>/<Right>/<Space>, ~ to cross line boundaries
 set nostartofline                                                         " don't move the cursos after some commands. (:h 'startofline')
+set switchbuf="usetab,newtab"
 
 " ┏━━━━━━━━━━━━━┓
 " ┃ Spell Check ┃

@@ -38,7 +38,7 @@ let g:ale_javascript_eslint_suppress_eslintignore = 1
 let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_linters_explicit = 1
 function! s:PRETTIER_OPTIONS()
-  return '--config-precedence prefer-file --single-quote --no-bracket-spacing --prose-wrap always --trailing-comma all --semi --end-of-line  lf --print-width ' . &textwidth
+  return '--config-precedence prefer-file --prose-wrap preserve' 
 endfunction
 let g:ale_javascript_prettier_options = <SID>PRETTIER_OPTIONS()
 augroup PrettierTextWidth
@@ -49,6 +49,7 @@ augroup END
 let g:ale_linters = {
             \ 'javascript' : ['eslint'],
             \ 'typescript' : ['eslint'],
+            \ 'vue'        : ['eslint'],
             \ 'vim'        : ['vint'],
             \ 'markdown'   : ['alex'],
             \ 'sh'         : ['shellcheck'],
@@ -63,6 +64,7 @@ let g:ale_fixers = {
             \ 'typescript'     : ['prettier'],
             \ 'typescript.tsx' : ['prettier'],
             \ 'typescriptreact' : ['prettier'],
+            \ 'vue'            : ['prettier'],
             \ 'json'           : ['prettier'],
             \ 'css'            : ['prettier'],
             \ 'scss'           : ['prettier'],

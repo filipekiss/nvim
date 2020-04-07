@@ -8,3 +8,4 @@ if extensions#isInstalling()
 endif
 
 
+let g:doge_comment_jump_modes = ['n', 's']

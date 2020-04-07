@@ -49,7 +49,7 @@ function! functions#NeatFoldText()
     let l:lines=(v:foldend - v:foldstart + 1) . ' lines'
     let l:first=substitute(getline(v:foldstart), '\v *', '', '')
     let l:dashes=substitute(v:folddashes, '-', l:foldchar, 'g')
-    return l:dashes . l:foldchar . l:foldchar . ' ' . l:lines . ': ' . l:first . ' '
+    return l:dashes . l:foldchar . l:foldchar . ' ' . l:first . ' (' . l:lines . ')'
 endfunction
 
 function! functions#SetProjectDir(...)
@@ -279,4 +279,9 @@ endfunction
 function! functions#HasMacosApp(appname)
     let app_path=system('mdfind "'.a:appname.'" -onlyin /Applications')
     return app_path !=? ''
+endfunction
+
+function! functions#HasColorScheme(colorscheme) abort
+    let pat = 'colors/'.a:colorscheme.'.vim'
+    return !empty(globpath(&rtp, pat))
 endfunction

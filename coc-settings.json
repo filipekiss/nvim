@@ -1,21 +1,39 @@
 {
-	"coc.preferences.colorSupport": false,
-	"suggest.autoTrigger": "always",
-	"suggest.noselect": true,
-	"suggest.echodocSupport": true,
-	"suggest.floatEnable": true,
-	"diagnostic.enable": true,
-	"diagnostic.displayByAle": true,
-	"diagnostic.messageTarget": "float",
-	"diagnostic.refreshOnInsertMode": true,
-	"git.enableGutters": false,
-	"git.addedSign.text": "+",
-	"git.changedSign.text": "~",
-	"git.removedSign.text": "-",
-	"git.topRemovedSign.text": "-",
-	"git.changeRemovedSign.text": "-",
-	"diagnostic.hintSign": "",
-	"diagnostic.infoSign": "",
-	"diagnostic.errorSign": "✖",
-	"diagnostic.warningSign": ""
+  "coc.preferences.jumpCommand": "tab drop",
+  "coc.preferences.colorSupport": false,
+  "suggest.autoTrigger": "always",
+  "suggest.noselect": true,
+  "suggest.echodocSupport": true,
+  "suggest.floatEnable": true,
+  "suggest.timeout": 5000,
+  "diagnostic.enable": true,
+  "diagnostic.displayByAle": true,
+  "diagnostic.messageTarget": "float",
+  "diagnostic.refreshOnInsertMode": true,
+  "git.enableGutters": false,
+  "git.addedSign.text": "+",
+  "git.changedSign.text": "~",
+  "git.removedSign.text": "-",
+  "git.topRemovedSign.text": "-",
+  "git.changeRemovedSign.text": "-",
+  "diagnostic.hintSign": "",
+  "diagnostic.infoSign": "",
+  "diagnostic.errorSign": "✖",
+  "diagnostic.warningSign": "",
+  "tabnine.priority": 95,
+  "suggest.maxCompleteItemCount": 20,
+  "snippets.ultisnips.directories": ["ultisnips", "~/.ultisnips"],
+  "tsserver.npm": "/usr/local/bin/npm",
+  "emmet.includeLanguages": {
+    "jsx": "javascriptreact",
+    "tsx": "typescriptreact"
+  },
+  "json.schemas": [
+    {
+      "name": "tsconfig.json",
+      "description": "TypeScript compiler configuration file",
+      "fileMatch": ["tsconfig.json", "tsconfig.*.json"],
+      "url": "http://json.schemastore.org/tsconfig"
+    }
+  ]
 }

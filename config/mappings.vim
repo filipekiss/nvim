@@ -4,7 +4,7 @@ scriptencoding utf-8
 " │ Leader and local leader │
 " └─────────────────────────┘
 let mapleader="\<Space>"
-let localleader=','
+let maplocalleader=','
 
 " ┌──────────────────────┐
 " │ Cursor/Text Movement │
@@ -27,8 +27,10 @@ nnoremap <Up> :resize +2<CR>
 nnoremap <Down> :resize -2<CR>
 
 " Treat overflowing lines as having line breaks.
-map <expr> j v:count ? 'j' : 'gj'
-map <expr> k v:count ? 'k' : 'gk'
+nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
+xnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
+nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+xnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 
 " Quickly move current line up/down, also accepts counts 2<leader>j
 " and also works with visual selection
@@ -106,24 +108,18 @@ nnoremap <C-l> <C-w><C-l>
 nnoremap <expr><silent> <Bar> v:count == 0 ? "<C-W>v<C-W><Right>" : ":<C-U>normal! 0".v:count."<Bar><CR>"
 nnoremap <expr><silent> _     v:count == 0 ? "<C-W>s<C-W><Down>"  : ":<C-U>normal! ".v:count."_<CR>"
 
-"" [N] <tab> -- Next tab
-"" [N] <S-tab> -- Previous tab
-nnoremap <tab>   :tabnext<CR>
-nnoremap <S-tab> :tabprevious<CR>
-
-"" [N] ;n -- Next Buffer
-nnoremap ;n :bnext<CR>
-"" [N] ;p -- Previous Buffer
-nnoremap ;p :bprevious<CR>
-" [N] ;; -- repeat f/F/t/T
-nnoremap ;; ;          
+"" [N] <tab> -- Next buffer
+"" [N] <S-tab> -- Previous buffer
+nnoremap <tab>   :bnext<CR>
+nnoremap <S-tab> :bprevious<CR>
 
 " ┌──────────────────┐
 " │ Utility Mappings │
 " └──────────────────┘
 
-" If vim is in diff mode, close all buffers. Otherwhise, :quit
-nnoremap <expr><silent> <leader>q &diff ? ":windo bd<CR>" : ":quit<CR>"
+" If vim is in diff mode, close all buffers. Otherwise, :quit
+nnoremap <expr><silent> <leader>Q &diff ? ":windo bd<CR>" : ":quit<CR>"
+
 
 " https://github.com/mhinz/vim-galore#quickly-edit-your-macros
 "" [N] <leader>m -- Edit the macro on any register (default *)
@@ -185,3 +181,10 @@ nnoremap <leader>i bi
 
 "" [N] <leader>a -- Insert after current word under the cursor
 nnoremap <leader>a ea
+
+nnoremap yos :silent set invspell<CR>
+nnoremap yot :silent set invwrap<CR>
+
+nnoremap yzi :setlocal foldmethod=indent<CR>
+nnoremap yzs :setlocal foldmethod=syntax<CR>
+nnoremap yzm :setlocal foldmethod=marker<CR>

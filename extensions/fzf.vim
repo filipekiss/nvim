@@ -12,11 +12,11 @@ if extensions#isMissing('fzf.vim', 'fzf.vim')
     finish
 endif
 let g:fzf_action = {
-            \ 'return': 'tabedit',
+            \ 'return': 'edit',
             \ 'ctrl-t': 'tab split',
             \ 'ctrl-x': 'split',
             \ 'ctrl-v': 'vsplit',
-            \ 'ctrl-e': 'edit'
+            \ 'ctrl-e': 'tabedit'
             \}
 
 let g:fzf_files_options = $FZF_CTRL_T_OPTS

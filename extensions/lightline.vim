@@ -27,7 +27,7 @@ let s:left_status = [
 " to show up
 let s:right_status =[
             \ [ 'lineinfo' ],
-            \ [ 'fileformat', 'fileencoding', 'filetype' ] ,
+            \ [ 'spellcheck', 'fileformat', 'fileencoding', 'filetype' ] ,
             \ ['linter_ok', 'linter_warnings', 'linter_errors'],
             \ ]
 
@@ -38,7 +38,8 @@ let g:lightline.component_expand = {
             \ }
 
 let g:lightline.component_function = {
-            \ 'filename': 'FilenamePrefix'
+            \ 'filename': 'FilenamePrefix',
+            \ 'spellcheck': 'SpellChecker',
             \ }
 
 let g:lightline.component_type = {
@@ -57,7 +58,7 @@ let g:lightline.inactive = {
             \            [ 'percent' ] ] }
 let g:lightline.tabline = {
             \ 'left': [ [ 'tabs' ] ],
-            \ 'right': [ [ 'close' ] ] }
+            \ 'right': [ [] ] }
 
 function! FilenamePrefix() abort
     " Get path without filename
@@ -96,6 +97,15 @@ function! FilenamePrefix() abort
     return  l:dimmedColor . l:pathPrefix . substitute(l:basename . '/', '\C^' . $HOME, '~', '') . l:normalColor . l:fileName
 endfunction
 
+function! SpellChecker() abort
+    let l:spellcheckEnabled = '𝐒'
+    let l:spellcheckDisabled = ''
+    if ( &spell )
+        return l:spellcheckEnabled
+    endif
+    return l:spellcheckDisabled
+endfunction
+
 if executable('devicon-lookup')
     function! IconFormat() abort
         let l:fileicon = WebDevIconsGetFileTypeSymbol()
@@ -105,8 +115,8 @@ if executable('devicon-lookup')
     let g:lightline.component_function.filetype = 'IconFormat'
 endif
 
-if extensions#isInstalled('falcon')
-    let g:lightline.colorscheme = 'falcon'
+if functions#HasColorScheme('two-firewatch')
+    let g:lightline.colorscheme = 'twofirewatch'
 endif
 
 augroup LightLineUpdate

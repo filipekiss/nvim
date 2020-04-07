@@ -3,15 +3,13 @@
 scriptencoding utf-8
 
 if extensions#isInstalling()
-    call extensions#loadExtension('https://github.com/mhinz/vim-sayonara', {'on': 'Sayonara'})
+    call extensions#loadExtension('https://github.com/filipekiss/vim-sayonara')
     finish
 endif
 
-"" [N] <M-d> -- Close current buffer [sayonara]
-if has('macunix')
-    nnoremap ∂ :Sayonara!<CR>
-else
-    nnoremap <M-d> :Sayonara!<CR>
-endif
+let g:sayonara_startify = 1
+let g:sayonara_confirm_quit = 1
 
+"" [N] <Leader>q -- Close current buffer [sayonara]
+nnoremap <expr><silent> <leader>q &diff ? ":windo bd<CR>" : ":Sayonara<CR>"
 

@@ -11,8 +11,9 @@ Vimfiles Help Index: |VimFiles|
   `:ALEEnableFixers..............` Enable Ale Fixers globally [ale]
   `:C............................` Clear hlsearch
   `:Del..........................` Delete current file and clear the buffer
-  `:EditExtension.<name>.........` Edit the extension file with the given name
+  `:EditExtension <name>.........` Edit the extension file with the given name
   `:FormatJSON...................` Format JSON in current buffer
+  `:Gist <filename>..............` Creates a private gist using the gist binary (http://defunkt.io/gist/) 
   `:LightlineReload..............` Reload Lightline Configuration [lightline]
   `:ReloadExtensions.............` Reload and install missing extensions
   `:TabMessage...................` Redirect the output of a command to a new tab
