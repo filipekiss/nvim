@@ -16,7 +16,7 @@ let g:fzf_action = {
             \ 'ctrl-t': 'tab split',
             \ 'ctrl-x': 'split',
             \ 'ctrl-v': 'vsplit',
-            \ 'ctrl-e': 'tabedit'
+            \ 'ctrl-e': 'edit'
             \}
 
 let g:fzf_files_options = $FZF_CTRL_T_OPTS
@@ -74,7 +74,7 @@ if executable('devicon-lookup')
                 \ 'ctrl-e': 'edit'}
 
     function! s:action_for(key, ...)
-        let default = a:0 ? a:1 : 'tab split'
+        let default = a:0 ? a:1 : 'edit'
         let Cmd = get(get(g:, 'fzf_action', s:default_action), a:key, default)
         return type(Cmd) == type('') ? Cmd : default
     endfunction
