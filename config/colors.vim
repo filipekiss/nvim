@@ -3,7 +3,7 @@ if has('termguicolors')
 end
 
 try
-    colorscheme two-firewatch
+    colorscheme falcon
 catch
     colorscheme ron
 endtry
