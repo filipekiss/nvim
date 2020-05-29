@@ -105,8 +105,10 @@ nnoremap <C-l> <C-w><C-l>
 
 "" [N] <Bar> -- Split window vertically
 "" [N] _ -- Split Window Horizontally
-nnoremap <expr><silent> <Bar> v:count == 0 ? "<C-W>v<C-W><Right>" : ":<C-U>normal! 0".v:count."<Bar><CR>"
-nnoremap <expr><silent> _     v:count == 0 ? "<C-W>s<C-W><Down>"  : ":<C-U>normal! ".v:count."_<CR>"
+" nnoremap <expr><silent> <Bar> v:count == 0 ? "<C-W>v<C-W><Right>" : ":<C-U>normal! 0".v:count."<Bar><CR>"
+" nnoremap <expr><silent> _     v:count == 0 ? "<C-W>s<C-W><Down>"  : ":<C-U>normal! ".v:count."_<CR>"
+nnoremap <expr><silent> <Bar> v:count == 0 ? ":vnew +terminal<CR>" : ":<C-U>normal! 0".v:count."<Bar><CR>"
+nnoremap <expr><silent> _     v:count == 0 ? ":new +terminal<CR>"  : ":<C-U>normal! ".v:count."_<CR>"
 
 "" [N] <tab> -- Next buffer
 "" [N] <S-tab> -- Previous buffer
@@ -188,3 +190,8 @@ nnoremap yot :silent set invwrap<CR>
 nnoremap yzi :setlocal foldmethod=indent<CR>
 nnoremap yzs :setlocal foldmethod=syntax<CR>
 nnoremap yzm :setlocal foldmethod=marker<CR>
+
+
+if has('nvim')
+    tnoremap <Leader>q <C-\><C-n>
+endif

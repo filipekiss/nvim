@@ -5,8 +5,14 @@ function! setup#init() abort
 	" Set python binaries for nvim
         let g:python_host_skip_check = 1
         let g:python3_host_skip_check = 1
+        let g:loaded_python_provider = 0 " Disable Python 2
         if executable('python3')
             let g:python3_host_prog = exepath('python3')
+        endif
+        if executable('volta')
+            " Make sure `volta install neovim` works as expected
+            " See https://github.com/volta-cli/volta/issues/606 for more info
+            let g:node_host_prog = '/Users/kissf/.volta/bin/neovim-node-host'
         endif
     endif
     call extensions#install()
