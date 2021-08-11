@@ -11,9 +11,9 @@ if extensions#isMissing('ultisnips', 'UltiSnips.vim')
 endif
 
 let g:UltiSnipsExpandTrigger = '<C-U>'
-let g:UltiSnipsJumpForwardTrigger = ''
-let g:UltiSnipsJumpBackwardTrigger = ''
-let g:UltiSnipsListSnippets = ''
+let g:UltiSnipsJumpForwardTrigger = '<C-N>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-P>'
+let g:UltiSnipsListSnippets = '<Plug>(ultisnips_list)'
 let g:UltiSnipsSnippetDirectories=[
             \ $VIMHOME . '/ultisnips',
             \ $HOME . '/.ultisnips'
