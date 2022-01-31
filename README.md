@@ -1,6 +1,9 @@
-# Kiss' Neovim Files
+> This is my old configuration. I decided to start a new one, making it fully in
+> Lua.
 
-> My neovim configuration
+> You can check my new configuration on [filipekiss/nvim.lua](https://github.com/filipekiss/nvim.lua)
+
+# Kiss' Neovim Files
 
 ###### ⚠️ This configuration is not intended to be used with Vim. My daily editor is NeoVim and Vim is left as vanilla as it can be on my machines. ⚠️
 
